@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     
     # other app
     'pages.apps.PagesConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
