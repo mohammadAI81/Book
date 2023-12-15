@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Book Store</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,11 +22,13 @@
 </head>
 <body>
     
-    {% include 'partials/_topbar_.html' %}
+    {% include 'partials/__topbar__.html' %}
 
     {% block content %}
     {% endblock content %}
 
+    {% include 'partials/__footer__.html' %}
+    
 <!-- script
 ================================================== -->
 <script src="{% static 'js/modernizr.js' %}"></script>
