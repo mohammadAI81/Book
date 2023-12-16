@@ -13,7 +13,7 @@ class Blog(models.Model):
     # photo
     title = models.CharField(max_length=255)
     discription = models.TextField()
-    status = models.CharField(default='pd', choices=STATUS, max_length=2)
+    status = models.CharField(default=STATUS_PUB, choices=STATUS, max_length=2)
     
     def __str__(self):
         return self.title
