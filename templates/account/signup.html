@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,32 +6,32 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{% static 'images_login/icons/favicon.ico' %}"/>
+	<link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor_login/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'fonts_login/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'fonts_login/iconic/css/material-design-iconic-font.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor_login/animate/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor_login/css-hamburgers/hamburgers.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor_login/animsition/css/animsition.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animsition/css/animsition.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor_login/select2/select2.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor_login/daterangepicker/daterangepicker.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/daterangepicker/daterangepicker.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'css_login/util.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css_login/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
 <!--===============================================================================================-->
 </head>
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-login100" style="background-image: url({% static 'login/images/bg-01.jpg' %});">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form class="login100-form validate-form" method="POST">
 					{% csrf_token %}
@@ -40,29 +41,29 @@
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
 						<span class="label-input100">Username</span>
-						<input class="input100" type="text" name="username" placeholder="Type your username">
+						<input class="input100" type="text" name="username" placeholder="Type your username" required>
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">email</span>
-						<input class="input100" type="email" name="email" placeholder="Type your email">
-						<span class="focus-input100" data-symbol="&#x1F4E7;"></span>
+						<input class="input100" type="email" name="email" placeholder="Type your email" required>
+						<span class="focus-input100" data-symbol="&#9993;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
+					<div class="wrap-input100 validate-input mt-3" data-validate="Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="password" placeholder="Type your password">
+						<input class="input100" type="password" name="password" placeholder="Type your password" required>
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
+					<div class="wrap-input100 validate-input mt-3" data-validate="Password is required">
 						<span class="label-input100">Confirem Password</span>
-						<input class="input100" type="password" name="password2" placeholder="Type your password">
+						<input class="input100" type="password" name="password2" placeholder="Type your Confirem password" required>
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					
-					<div class="container-login100-form-btn">
+					<div class="container-login100-form-btn mt-5">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn">
@@ -71,9 +72,9 @@
 						</div>
 					</div>
 
-					<div class="flex-col-c p-t-155">
-						<a href="#" class="txt2">
-							Sign Up
+					<div class="flex-col-c p-t-15">
+						<a href="{% url 'login' %}" class="txt2">
+							Login
 						</a>
 					</div>
 				</form>
@@ -85,21 +86,21 @@
 	<div id="dropDownSelect1"></div>
 	
 <!--===============================================================================================-->
-	<script src="{% static 'vendor_login/jquery/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'vendor_login/animsition/js/animsition.min.js' %}"></script>
+	<script src="{% static 'login/vendor/animsition/js/animsition.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'vendor_login/bootstrap/js/popper.js' %}"></script>
-	<script src="{% static 'vendor_login/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'vendor_login/select2/select2.min.js' %}"></script>
+	<script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'vendor_login/daterangepicker/moment.min.js' %}"></script>
-	<script src="{% static 'vendor_login/daterangepicker/daterangepicker.js' %}"></script>
+	<script src="{% static 'login/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'login/vendor/daterangepicker/daterangepicker.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'vendor_login/countdowntime/countdowntime.js' %}"></script>
+	<script src="{% static 'login/vendor/countdowntime/countdowntime.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="{% static 'js_login/main.js' %}"></script>
+	<script src="{% static 'login/js/main.js' %}"></script>
 
 </body>
 </html>

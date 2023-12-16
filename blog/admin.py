@@ -10,7 +10,11 @@ class BlogAdmin(ModelAdmin):
     list_editable = ('status',)
     list_per_page = 15
     ordering = ('title',)
-    
+    fieldsets = (
+        ('Import Fields', {'fields': ('title', 'discription', 'status')}),
+        ('Other Fields', {'fields': ('datetime_created', 'datetime_modified')}),
+    )
+    readonly_fields = ('datetime_created', 'datetime_modified')
 
 
 @admin.register(Comment)
@@ -23,4 +27,5 @@ class CommentAdmin(ModelAdmin):
         ('Import Fields', {'fields': ('author', 'book', 'text')}),
         ('Other Fields', {'fields': ('datetime_created', 'datetime_modified')}),
     )
+    readonly_fields = ('datetime_created', 'datetime_modified')
     

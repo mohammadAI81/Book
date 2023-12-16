@@ -40,3 +40,7 @@ def signup(request):
 def dashboard(request):
     
     return
+
+def logout(request):
+    auth.logout(request)    
+    return render(request, 'pages/home.html')
