@@ -10,8 +10,13 @@
 				</div>
 				<div class="col-md-6">
 					<div class="right-element">
-						<a href="#" class="user-account for-buy">Sign Up</a>
-						<a href="#" class="user-account for-buy">Login</a>
+						{% if user.is_authenticated %}
+							<a href="{% url 'dashboard' %}" class="user-account for-buy">{{ user.username }}</a>
+							<a href="{% url 'logout' %}" class="user-account for-buy">Log Out</a>
+						{% else %}
+							<a href="{% url 'singup' %}" class="user-account for-buy">Sign Up</a>
+							<a href="{% url 'login' %}" class="user-account for-buy">Login</a>
+						{% endif %}
 						<a href="#" class="cart for-buy"><span>Cart</span></a>
 
 						<div class="action-menu">
