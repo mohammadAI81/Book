@@ -25,28 +25,31 @@
             <div class="row">
                 <div class="col-md-12">
                     <!-- post grid -->
+                    {% if blogs %}
                     <div class="post-grid">
                         <div class="row">
-                            <div class="col-md-4">
-                                
-                                <article class="post-item">
-    
-                                    <figure>
-                                        <a href="#" class="image-hvr-effect">
-                                            <img src="{% static 'images/post-img1.jpg' %}" alt="post" class="post-image">			
-                                        </a>
-                                    </figure>
-    
-                                    <div class="post-content">	
-                                        <div class="meta-date">Mar 30, 2021</div>			
-                                        <h3 class="post-title"><a href="#">modern vibes bedrooms, todays trending design</a></h3>
-                                        <p>Lectus molestie id enim ipsum. Netus sed cursus nibh iaculis ipsum turpis nulla blandit dui.</p>
-                                    </div>
-                                </article>
-    
+                                {% for blog in blogs %}
+                                <div class="col-md-4">
+                                    <article class="post-item">
+                                        <figure>
+                                            <a href="{% url 'detail_blog' blog.id %}" class="image-hvr-effect">
+                                                <img src="{% static 'images/post-img1.jpg' %}" alt="post" class="post-image">			
+                                            </a>
+                                        </figure>
+        
+                                        <div class="post-content">	
+                                            <div class="meta-date">{{ blog.datetime_created }}</div>			
+                                            <h3 class="post-title"><a href="{% url 'detail_blog' blog.id %}">{{ blog.title|title }}</a></h3>
+                                            <p>{{ blog.discription|truncatewords:10 }}</p>
+                                        </div>
+                                    </article>
+                                </div>
+                                {% endfor %}
                             </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <h3 class="post-title">We Don't Have Blogs</h3>
+                    {% endif %}
                     <!-- / post grid -->
                 </div>
             </div>

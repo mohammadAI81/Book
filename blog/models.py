@@ -9,6 +9,7 @@ class Blog(models.Model):
         (STATUS_DRA, 'Draft'),
     )
     
+    # author
     # photo
     title = models.CharField(max_length=255)
     discription = models.TextField()
