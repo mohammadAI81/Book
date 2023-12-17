@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blogs{% endblock title %}
+
+
+{% block content %}
+    <section class="hero-section jarallax">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-15">			
+                    <h1 class="page-title">Blogs</h1>
+                    <div class="breadcrumbs">
+                        <span class="item"><a href="{% url 'home' %}">Home /</a></span>
+                        <span class="item">Blogs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="latest-blog" class="scrollspy-section padding-large">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- post grid -->
+                    <div class="post-grid">
+                        <div class="row">
+                            <div class="col-md-4">
+                                
+                                <article class="post-item">
+    
+                                    <figure>
+                                        <a href="#" class="image-hvr-effect">
+                                            <img src="{% static 'images/post-img1.jpg' %}" alt="post" class="post-image">			
+                                        </a>
+                                    </figure>
+    
+                                    <div class="post-content">	
+                                        <div class="meta-date">Mar 30, 2021</div>			
+                                        <h3 class="post-title"><a href="#">modern vibes bedrooms, todays trending design</a></h3>
+                                        <p>Lectus molestie id enim ipsum. Netus sed cursus nibh iaculis ipsum turpis nulla blandit dui.</p>
+                                    </div>
+                                </article>
+    
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / post grid -->
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

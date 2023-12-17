@@ -47,7 +47,7 @@
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="Type your password">
+						<input class="input100" type="password" name="password" placeholder="Type your password">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					
@@ -67,9 +67,14 @@
 					</div>
 
 					<div class="flex-col-c p-t-15">
-						<a href="{% url 'signup' %}" class="txt2">
-							Sign Up
-						</a>
+						<p>
+							<a href="{% url 'signup' %}" class="txt2">
+								Sign Up
+							</a> | 
+							<a href="{% url 'home' %}" class="txt2">
+								Home
+							</a>
+						</p>
 					</div>
 				</form>
 			</div>

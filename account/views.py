@@ -10,8 +10,9 @@ def login(request):
         password = request.POST['password']
         if password and username:
             user = auth.authenticate(request, password=password, username=username)
-            if user :
+            if user is not None :
                 auth.login(request, user)
+                return redirect('home')
             else:
                 return redirect('login')    
         else:
@@ -30,7 +31,7 @@ def signup(request):
             else:
                 if password == password2:
                     user = CustomAdmin.objects.create_user(username=username, email=email, password=password)
-                    redirect('login')
+                    return redirect('login')
                 else:
                     return redirect('signup')
         else:
@@ -43,4 +44,4 @@ def dashboard(request):
 
 def logout(request):
     auth.logout(request)    
-    return render(request, 'pages/home.html')
+    return redirect('home')
