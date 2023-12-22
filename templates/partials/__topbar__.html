@@ -12,13 +12,13 @@
 					<div class="right-element">
 						{% if user.is_authenticated %}
 							<a href="{% url 'dashboard' %}" class="user-account for-buy"><i class="icon icon-user"></i>
-								{{ user.username|upper }}</a>
+								DASHBOARD ({{ user.username|upper }})</a>
 							<a href="{% url 'logout' %}" class="user-account for-buy">Log Out</a>
 						{% else %}
 							<a href="{% url 'signup' %}" class="user-account for-buy">Sign Up</a>
 							<a href="{% url 'login' %}" class="user-account for-buy">Login</a>
 						{% endif %}
-						<a href="#" class="cart for-buy"><span>Cart</span></a>
+						<a href="#" class="cart for-buy"><i class="icon icon-clipboard" ></i> Cart</a>
 
 						<div class="action-menu">
 

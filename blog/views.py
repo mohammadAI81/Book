@@ -12,9 +12,14 @@ def blogs(request):
 
 def detail(request, num):
     blog = get_object_or_404(Blog, id=num)
+    comments = blog.book_comments.all()
     
+    context = {
+        'blog': blog,
+        'comments': comments,
+    }
     
-    return
+    return render(request, 'blog/blog.html', context)
 
 def create(request):
     
