@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %} Create Blog {% endblock title %}
+
+{% block content %}
+<section class="padding-large">
+    <div class="container">
+    <section class="comment-respond  mb-5">			
+        <h2>New Blog</h2>
+        <form method="POST" class="form-group mt-3">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="title">Title</label>
+                    <input class="u-full-width" type="text" name="title" id="author" class="form-control mb-4 mr-4" placeholder="E.x My Title ..." value="{{ blog.title }}">
+                </div>
+                <div class="col-md-12">
+                    <label for="description">Description</label>
+                    <textarea class="u-full-width form-control" id="comment" name="discription"
+                    placeholder="Write your description ..." 
+                    rows="50" required>{{ blog.discription }}</textarea>
+                </div>
+                <div class="col-md-12">
+                    <label for="status">Status</label>
+                    <select name="status">
+                        
+                        <option value="pd" 
+                        {% if blog.status == 'pd' %}
+                        selected
+                        {% endif %}
+                        >Published</option>
+                        <option 
+                        {% if blog.status == 'dr' %}
+                        selected
+                        {% endif %}
+                        value="dr">Draft</option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <input class="btn btn-rounded btn-large btn-full" type="submit"
+                    {% if blog and user.is_authenticated %}
+                    value="Edit"
+                    {% elif user.is_authenticated %}
+                    value="Create"
+                    {% else %}
+                    value="First Login" disabled
+                    {% endif %}
+                    >
+                </div>
+            </div>
+        </form>
+    </section>
+    </div>
+<section>
+{% endblock content %}

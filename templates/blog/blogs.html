@@ -38,7 +38,7 @@
                                         </figure>
         
                                         <div class="post-content">	
-                                            <div class="meta-date">{{ blog.datetime_created }}</div>			
+                                            <div class="meta-date">{{ blog.datetime_created|date:'M d, Y' }}</div>			
                                             <h3 class="post-title"><a href="{% url 'detail_blog' blog.id %}">{{ blog.title|title }}</a></h3>
                                             <p>{{ blog.discription|truncatewords:10 }}</p>
                                         </div>

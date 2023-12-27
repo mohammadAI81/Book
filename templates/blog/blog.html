@@ -34,7 +34,7 @@
                         <p>{{ blog.discription|linebreaks }}
                         </p>
 
-                        <!--<button type="submit" name="add-to-cart" value="27545" class="button">Add to cart</button>-->
+                        <a href="{% url 'edit_blog' blog.title %}" class="btn btn-outline-dark btn-rounded">Edit</a>
                         
                     </div>
                 </div>

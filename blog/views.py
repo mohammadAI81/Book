@@ -37,13 +37,36 @@ def detail(request, num):
 
 def create(request):
     
-    return render(request, 'blog/create.html')
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            title = request.POST['title']
+            discription = request.POST['discription']
+            status = request.POST['status']
+            if title and discription and status:
+                blog = Blog.objects.create(title=title, discription=discription, status=status)
+                return redirect('detail_blog', blog.id)
+            else:
+                return redirect('list_blog')
+    
+    
+    return render(request, 'blog/create_edit.html')
 
 def edit(request, name):
     blog = get_object_or_404(Blog, title=name)
     
+    if request.method == 'POST':
+        title = request.POST['title']
+        discription = request.POST['discription']
+        status = request.POST['status']
+        Blog.objects.update(title=title, discription=discription, status=status)
+        return redirect('detail_blog', blog.id)
     
-    return 
+    
+    context = {
+        'blog': blog
+    }
+    
+    return render(request, 'blog/create_edit.html', context)
 
 def delete(request, name):
     
