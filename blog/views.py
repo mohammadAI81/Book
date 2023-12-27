@@ -14,6 +14,20 @@ def detail(request, num):
     blog = get_object_or_404(Blog, id=num)
     comments = blog.book_comments.all()
     
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            user_comment = request.user
+            blog_comment = blog
+            text_comment = request.POST['comment']
+            if user_comment and text_comment and blog_comment:
+                comment = Comment(author=user_comment, book=blog_comment, text=text_comment)
+                comment.save()
+                return redirect('list_blog')
+            else:
+                return redirect('detail_blog', blog.id)
+        else:
+            return redirect('detail_blog', blog.id)
+    
     context = {
         'blog': blog,
         'comments': comments,
@@ -23,7 +37,7 @@ def detail(request, num):
 
 def create(request):
     
-    return 
+    return render(request, 'blog/create.html')
 
 def edit(request, name):
     blog = get_object_or_404(Blog, title=name)
