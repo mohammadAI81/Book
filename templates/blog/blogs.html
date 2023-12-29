@@ -33,7 +33,13 @@
                                     <article class="post-item">
                                         <figure>
                                             <a href="{% url 'detail_blog' blog.id %}" class="image-hvr-effect">
-                                                <img src="https://www.ascian.in/creatives/wp-content/uploads/blog-700x410.jpg" style="border-radius: 10px;"
+                                                <img 
+                                                {% if blog.photo %}
+                                                src="{{ blog.photo.url }}" 
+                                                {% else %}
+                                                src="https://www.ascian.in/creatives/wp-content/uploads/blog-700x410.jpg" 
+                                                {% endif %}
+                                                style="border-radius: 10px;"
                                                 alt="post" class="post-image">			
                                             </a>
                                         </figure>

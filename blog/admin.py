@@ -5,7 +5,7 @@ from .models import Comment, Blog
 
 @admin.register(Blog)
 class BlogAdmin(ModelAdmin):
-    list_display = ('title', 'status', 'datetime_created')    
+    list_display = ('title', 'author', 'status', 'datetime_created')    
     list_editable = ('status',)
     list_filter = ('status',)
     list_per_page = 20

@@ -38,27 +38,33 @@ def detail(request, num):
 def create(request):
     
     if request.method == 'POST':
+        
         if request.user.is_authenticated:
             title = request.POST['title']
             discription = request.POST['discription']
             status = request.POST['status']
+            if request.FILES:
+                picture = request.FILES['picture']
+            author = request.user
             if title and discription and status:
-                blog = Blog.objects.create(title=title, discription=discription, status=status)
+                blog = Blog.objects.create(title=title, discription=discription, status=status, photo=picture, author=author)
                 return redirect('detail_blog', blog.id)
             else:
-                return redirect('list_blog')
+                return redirect('create_blog')
     
     
     return render(request, 'blog/create_edit.html')
 
-def edit(request, name):
-    blog = get_object_or_404(Blog, title=name)
+def edit(request, num):
+    blog = get_object_or_404(Blog, id=num)
     
     if request.method == 'POST':
         title = request.POST['title']
         discription = request.POST['discription']
+        if request.FILES:
+                picture = request.FILES['picture']
         status = request.POST['status']
-        Blog.objects.update(title=title, discription=discription, status=status)
+        blog.objects.update(title=title, discription=discription, status=status)
         return redirect('detail_blog', blog.id)
     
     
@@ -68,8 +74,8 @@ def edit(request, name):
     
     return render(request, 'blog/create_edit.html', context)
 
-def delete(request, name):
-    blog = get_object_or_404(Blog, title=name)
+def delete(request, num):
+    blog = get_object_or_404(Blog, id=num)
     if request.method == 'POST':
         status = request.POST['status']
         if status == 'Yes':

@@ -24,19 +24,24 @@
 
                 <div class="col-md-6">
                     <a href="{% url 'detail_blog' blog.id %}" class="product-image">
-                        <img src="https://www.ascian.in/creatives/wp-content/uploads/blog-700x410.jpg" style="border-radius: 10px;"></a>
+                        <img 
+                        {% if blog.photo %}
+                        src="{{ blog.photo.url }}" 
+                        {% else %}
+                        src="https://www.ascian.in/creatives/wp-content/uploads/blog-700x410.jpg" 
+                        {% endif %}
+                        style="border-radius: 10px;"></a>
                 </div>
 
                 <div class="col-md-6 pl-5">
                     <div class="product-detail">
                         <h1>{{ blog.title }}</h1>
-                        <p>Fiction</p>
+                        <p>{{ blog.author|title }}</p>
 
-                        <p>{{ blog.discription|linebreaks }}
-                        </p>
+                        <p>{{ blog.discription|linebreaks }}</p>
 
-                        <a href="{% url 'edit_blog' blog.title %}" class="btn btn-outline-dark btn-rounded">Edit</a>
-                        <a href="{% url 'delete_blog' blog.title %}" class="btn btn-outline-dark btn-rounded">Delete</a>
+                        <a href="{% url 'edit_blog' blog.id %}" class="btn btn-outline-dark btn-rounded">Edit</a>
+                        <a href="{% url 'delete_blog' blog.id %}" class="btn btn-outline-dark btn-rounded">Delete</a>
                         
                     </div>
                 </div>
