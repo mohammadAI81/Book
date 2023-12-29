@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Blog, Comment
+from datetime import datetime
 
 def blogs(request):
     blogs = Blog.objects.filter(status = 'pd').order_by('-datetime_created').all()
@@ -57,14 +58,15 @@ def create(request):
 
 def edit(request, num):
     blog = get_object_or_404(Blog, id=num)
-    
     if request.method == 'POST':
-        title = request.POST['title']
-        discription = request.POST['discription']
         if request.FILES:
-                picture = request.FILES['picture']
-        status = request.POST['status']
-        blog.objects.update(title=title, discription=discription, status=status)
+            if blog.photo:   
+                blog.photo.delete()
+            blog.photo = request.FILES['picture']
+        blog.title = request.POST['title']
+        blog.discription = request.POST['discription']
+        blog.status = request.POST['status']
+        blog.save()
         return redirect('detail_blog', blog.id)
     
     
@@ -78,6 +80,7 @@ def delete(request, num):
     blog = get_object_or_404(Blog, id=num)
     if request.method == 'POST':
         status = request.POST['status']
+        print(status)
         if status == 'Yes':
             blog.delete()
             return redirect('list_blog')
