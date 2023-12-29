@@ -9,8 +9,8 @@ class Blog(models.Model):
         (STATUS_DRA, 'Draft'),
     )
     
-    # author
-    # photo
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='auhtor_blog', null=True)
+    photo = models.FileField(upload_to='blog/cover/%Y/%m', blank=True)
     title = models.CharField(max_length=255)
     discription = models.TextField()
     status = models.CharField(default=STATUS_PUB, choices=STATUS, max_length=2)

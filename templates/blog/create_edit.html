@@ -7,17 +7,21 @@
     <div class="container">
     <section class="comment-respond  mb-5">			
         <h2>New Blog</h2>
-        <form method="POST" class="form-group mt-3">
+        <form method="POST" class="form-group mt-3" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label for="title">Title</label>
                     <input class="u-full-width" type="text" name="title" id="author" class="form-control mb-4 mr-4" placeholder="E.x My Title ..." value="{{ blog.title }}">
+                </div>
+                <div class="col-md-6">
+                    <label for="picture">Upload Picture</label>
+                    <input type="file" name="picture">
                 </div>
                 <div class="col-md-12">
                     <label for="description">Description</label>
                     <textarea class="u-full-width form-control" id="comment" name="discription"
-                    placeholder="Write your description ..." 
+                    placeholder="Write your description ..." style="height: 300px;"
                     rows="50" required>{{ blog.discription }}</textarea>
                 </div>
                 <div class="col-md-12">
