@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Delete {{ blog.title }}{% endblock title %}
+
+{% block content %}
+<section class="bg-sand padding-large">
+    <div class="container">
+        <form action="{% url 'list_blog' %}" method="POST">
+            {% csrf_token %}
+            <h1>Do you want delete {{ blog.title }} ?</h1>
+            <input class="btn btn-rounded btn-outline-dark" type="submit" value="Yes" name="status">
+            <input class="btn btn-rounded btn-outline-dark" type="submit" value="No" name="status">
+        </form>        
+    </div>
+</section>
+{% endblock content %}

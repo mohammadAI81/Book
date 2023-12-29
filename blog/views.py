@@ -69,5 +69,18 @@ def edit(request, name):
     return render(request, 'blog/create_edit.html', context)
 
 def delete(request, name):
+    blog = get_object_or_404(Blog, title=name)
+    if request.method == 'POST':
+        status = request.POST['status']
+        if status == 'Yes':
+            blog.delete()
+            return redirect('list_blog')
+        else:
+            return redirect('list_blog')
+        
+        
+    context = {
+        'blog': blog
+    }
     
-    return 
+    return render(request, 'blog/delete.html', context)
