@@ -10,7 +10,7 @@ class CustomAdmin(AbstractUser):
     # link github
     # link telgram
     # link instagram
-    # link twwiter 
+    # link twitter 
     
     def __str__(self):
         return self.username
