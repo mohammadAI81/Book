@@ -80,8 +80,8 @@ def delete(request, num):
     blog = get_object_or_404(Blog, id=num)
     if request.method == 'POST':
         status = request.POST['status']
-        print(status)
         if status == 'Yes':
+            blog.photo.delete
             blog.delete()
             return redirect('list_blog')
         else:

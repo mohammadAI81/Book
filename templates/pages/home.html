@@ -53,7 +53,7 @@
 
                                 <figure>
                                     <a href="{% url 'detail_blog' blog.id %}" class="image-hvr-effect">
-                                        <img src="images/post-img1.jpg" alt="post" class="post-image">			
+                                        <img src="{{ blog.photo.url }}" alt="post" class="post-image" style="border-radius: 20px;">			
                                     </a>
                                 </figure>
 
