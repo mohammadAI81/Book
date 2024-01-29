@@ -11,34 +11,31 @@ def blogs(request):
     }
     return render(request, 'blog/blogs.html', context)
 
-# @login_required(login_url='/account/login/')
+@login_required(login_url='/account/login/')
 def detail(request, num):
-    if request.user.is_authenticated:
-        blog = get_object_or_404(Blog, id=num)
-        comments = blog.book_comments.all()
-        
-        if request.method == 'POST':
-            if request.user.is_authenticated:
-                user_comment = request.user
-                blog_comment = blog
-                text_comment = request.POST['comment']
-                if user_comment and text_comment and blog_comment:
-                    comment = Comment(author=user_comment, book=blog_comment, text=text_comment)
-                    comment.save()
-                    return redirect('list_blog')
-                else:
-                    return redirect('detail_blog', blog.id)
+    blog = get_object_or_404(Blog, id=num)
+    comments = blog.book_comments.all()
+    
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            user_comment = request.user
+            blog_comment = blog
+            text_comment = request.POST['comment']
+            if user_comment and text_comment and blog_comment:
+                comment = Comment(author=user_comment, book=blog_comment, text=text_comment)
+                comment.save()
+                return redirect('list_blog')
             else:
                 return redirect('detail_blog', blog.id)
-        
-        context = {
-            'blog': blog,
-            'comments': comments,
-        }
-        
-        return render(request, 'blog/blog.html', context)
-    else:
-        return redirect(f'/account/login/?next={request.path}')
+        else:
+            return redirect('detail_blog', blog.id)
+    
+    context = {
+        'blog': blog,
+        'comments': comments,
+    }
+    
+    return render(request, 'blog/blog.html', context)
 
 def create(request):
     

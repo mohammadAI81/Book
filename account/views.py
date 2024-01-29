@@ -4,23 +4,23 @@ from django.conf import settings
 from .models import CustomAdmin
 
 
-def login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        if password and username:
-            user = auth.authenticate(request, password=password, username=username)
-            if user is not None :
-                auth.login(request, user)
-                if request.GET:
-                    return redirect(request.GET['next'])
-                else:
-                    return redirect('home')
-            else:
-                return redirect('login')    
-        else:
-            return redirect('login')
-    return render(request, 'registration/login.html')
+# def login(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password']
+#         if password and username:
+#             user = auth.authenticate(request, password=password, username=username)
+#             if user is not None :
+#                 auth.login(request, user)
+#                 if request.GET:
+#                     return redirect(request.GET['next'])
+#                 else:
+#                     return redirect('home')
+#             else:
+#                 return redirect('login')    
+#         else:
+#             return redirect('login')
+#     return render(request, 'registration/login.html')
 
 def signup(request):
     if request.method == 'POST':

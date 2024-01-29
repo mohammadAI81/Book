@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+
 class Blog(models.Model):
     STATUS_PUB = 'pd'
     STATUS_DRA = 'dr'
@@ -8,7 +9,7 @@ class Blog(models.Model):
         (STATUS_PUB, 'Published'),
         (STATUS_DRA, 'Draft'),
     )
-    
+
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='auhtor_blog', null=True)
     photo = models.FileField(upload_to='blog/cover/%Y/%m', blank=True)
     title = models.CharField(max_length=255)
