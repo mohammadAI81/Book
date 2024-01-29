@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
-
+from django.conf import settings
 from .models import CustomAdmin
 
 
@@ -12,12 +12,15 @@ def login(request):
             user = auth.authenticate(request, password=password, username=username)
             if user is not None :
                 auth.login(request, user)
-                return redirect('home')
+                if request.GET:
+                    return redirect(request.GET['next'])
+                else:
+                    return redirect('home')
             else:
                 return redirect('login')    
         else:
             return redirect('login')
-    return render(request, 'account/login.html')
+    return render(request, 'registration/login.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -36,7 +39,7 @@ def signup(request):
                     return redirect('signup')
         else:
             return redirect('signup')
-    return render(request, 'account/signup.html')
+    return render(request, 'registration/signup.html')
 
 def dashboard(request):
     

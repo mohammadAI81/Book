@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
+from django.contrib.auth.decorators import login_required
 from .models import Blog, Comment
-from datetime import datetime
 
 def blogs(request):
     blogs = Blog.objects.filter(status = 'pd').order_by('-datetime_created').all()
@@ -11,30 +11,34 @@ def blogs(request):
     }
     return render(request, 'blog/blogs.html', context)
 
+# @login_required(login_url='/account/login/')
 def detail(request, num):
-    blog = get_object_or_404(Blog, id=num)
-    comments = blog.book_comments.all()
-    
-    if request.method == 'POST':
-        if request.user.is_authenticated:
-            user_comment = request.user
-            blog_comment = blog
-            text_comment = request.POST['comment']
-            if user_comment and text_comment and blog_comment:
-                comment = Comment(author=user_comment, book=blog_comment, text=text_comment)
-                comment.save()
-                return redirect('list_blog')
+    if request.user.is_authenticated:
+        blog = get_object_or_404(Blog, id=num)
+        comments = blog.book_comments.all()
+        
+        if request.method == 'POST':
+            if request.user.is_authenticated:
+                user_comment = request.user
+                blog_comment = blog
+                text_comment = request.POST['comment']
+                if user_comment and text_comment and blog_comment:
+                    comment = Comment(author=user_comment, book=blog_comment, text=text_comment)
+                    comment.save()
+                    return redirect('list_blog')
+                else:
+                    return redirect('detail_blog', blog.id)
             else:
                 return redirect('detail_blog', blog.id)
-        else:
-            return redirect('detail_blog', blog.id)
-    
-    context = {
-        'blog': blog,
-        'comments': comments,
-    }
-    
-    return render(request, 'blog/blog.html', context)
+        
+        context = {
+            'blog': blog,
+            'comments': comments,
+        }
+        
+        return render(request, 'blog/blog.html', context)
+    else:
+        return redirect(f'/account/login/?next={request.path}')
 
 def create(request):
     
@@ -81,7 +85,7 @@ def delete(request, num):
     if request.method == 'POST':
         status = request.POST['status']
         if status == 'Yes':
-            blog.photo.delete
+            blog.photo.delete(save=True)
             blog.delete()
             return redirect('list_blog')
         else:
