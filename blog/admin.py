@@ -3,6 +3,7 @@ from django.contrib.admin import ModelAdmin
 
 from .models import Comment, Blog
 
+
 @admin.register(Blog)
 class BlogAdmin(ModelAdmin):
     list_display = ('title', 'author', 'status', 'datetime_created')    
