@@ -69,11 +69,17 @@
 								class="menu-item"
 								{% endif %}
 								><a href="{% url 'about' %}" class="nav-link" data-effect="About">About</a></li>
-								<li class="menu-item has-sub">
-									<a href="#pages" class="nav-link" data-effect="Books">Books</a>
+								<li
+                                {% if 'books/' in request.path %}
+                                class="menu-item active"
+                                {% else %}
+                                class="menu-item"
+                                {% endif %}
+                                >
+									<a href="{% url 'books' %}" class="nav-link" data-effect="Books">Books</a>
 									<ul>
 								        <li><a href="blog.html">Authors</a></li>
-								        <li><a href="single-product.html">Product Single</a></li>
+								        <li><a href="{% url 'book_create' %}">New Book</a></li>
 								     </ul>
 								</li>
 								<li
@@ -82,7 +88,7 @@
 								{% else %}
 								class="menu-item"
 								{% endif %}
-								><a href="{% url 'list_blog' %}" class="nav-link active" data-effect="Shop">Blog</a>
+								><a href="{% url 'list_blog' %}" class="nav-link" data-effect="Shop">Blog</a>
 									<ul>
 										<li 
 										{% if '/blog/create/' in request.path %} 
@@ -90,7 +96,7 @@
 										{% else %}
 										class="menu-item"
 										{% endif %}
-										><a href="{% url 'create_blog' %}" class="nav-link active">New Blog</a></li>
+										><a href="{% url 'create_blog' %}" class="nav-link">New Blog</a></li>
 									</ul>
 								</li>
 								<li class="menu-item"><a href="#popular-books" class="nav-link" data-effect="Shop">Shop</a></li>

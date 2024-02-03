@@ -3,13 +3,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Blog, Comment
 
+
 def blogs(request):
-    blogs = Blog.objects.filter(status = 'pd').order_by('-datetime_created').all()
+    blogs = Blog.objects.filter(status='pd').order_by('-datetime_created').all()
 
     context = {
         'blogs': blogs,
     }
     return render(request, 'blog/blogs.html', context)
+
 
 @login_required(login_url='/account/login/')
 def detail(request, num):
@@ -36,6 +38,7 @@ def detail(request, num):
     }
     
     return render(request, 'blog/blog.html', context)
+
 
 def create(request):
     
