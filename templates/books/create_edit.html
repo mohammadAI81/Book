@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}  {% endblock %}
+{% block title %} Create Book {% endblock %}
 
 
 {% block content %}
@@ -11,9 +11,9 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="title">Title</label>
-                            <input class="u-full-width" type="text" name="title" id="author"
-                                   class="form-control mb-4 mr-4" placeholder="E.x My Title ..."
+                            <label for="author">Title</label>
+                            <input class="u-full-width form-control mb-4 mr-4" type="text" name="title" id="author"
+                                   placeholder="E.x My Title ..."
                                    value="{{ book.title }}">
                         </div>
                         <div class="col-md-6">
@@ -22,12 +22,16 @@
                             <input type="file" name="picture">
                         </div>
                         <div class="col-md-12">
-                            <label for="description">Description</label>
-                            <textarea class="u-full-width form-control" id="comment" name="discription"
+                            <label for="comment">Description</label>
+                            <textarea class="u-full-width form-control" id="comment" name="description"
                                       placeholder="Write your description ..." style="height: 300px;"
-                                      rows="50" required>{{ book.discription }}</textarea>
+                                      rows="50" required>{{ book.description }}</textarea>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <label for="num">Price [A thousand rials]</label>
+                            <input type="number" id="num" name="price" placeholder="" max="10000">
+                        </div>
+                        <div class="col-md-6">
                             <input class="btn btn-rounded btn-large btn-full" type="submit"
                                     {% if book and user.is_authenticated %}
                                    value="Edit"

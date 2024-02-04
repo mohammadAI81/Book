@@ -19,9 +19,9 @@ def create(request):
 
 
 def edit(request, pk):
-    book = Book.objects.get(id=pk)
+    book = get_object_or_404(Book, id=pk)
     if request.method == 'POST':
-        pass
+        print(request.POST)
 
     context = {
         'book': book
@@ -30,16 +30,17 @@ def edit(request, pk):
 
 
 def detail(request, pk):
-    book = Book.objects.get(id=pk)
-
+    book = get_object_or_404(Book, id=pk)
+    comments = book.comment_author.all()
     context = {
-        'book': book
+        'book': book,
+        'comments': comments
     }
     return render(request, 'books/book.html', context)
 
 
 def delete(request, pk):
-    book = Book.objects.get(id=pk)
+    book = get_object_or_404(Book, id=pk)
     context = {
         'book': book.title
     }
