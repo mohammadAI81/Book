@@ -69,37 +69,20 @@
 								class="menu-item"
 								{% endif %}
 								><a href="{% url 'about' %}" class="nav-link" data-effect="About">About</a></li>
-								<li
-                                {% if 'books/' in request.path %}
-                                class="menu-item active"
-                                {% else %}
-                                class="menu-item"
-                                {% endif %}
-                                >
-									<a href="{% url 'books' %}" class="nav-link" data-effect="Books">Books</a>
-									<ul>
-								        <li><a href="blog.html">Authors</a></li>
-								        <li><a href="{% url 'book_create' %}">New Book</a></li>
+								<li><a>Book</a>
+									<ul class="menu-list">
+									    <li><a href="{% url 'books' %}" class="nav-link" data-effect="Books">Books</a></li>
+								        <li><a href="#" class="nav-link">Authors</a></li>
+								        <li><a href="{% url 'book_create' %}" class="nav-link">New Book</a></li>
 								     </ul>
 								</li>
-								<li
-								{% if '/blog/' in request.path %} 
-								class="menu-item active"
-								{% else %}
-								class="menu-item"
-								{% endif %}
-								><a href="{% url 'list_blog' %}" class="nav-link" data-effect="Shop">Blog</a>
+                                <li><a>Blog</a>
 									<ul>
-										<li 
-										{% if '/blog/create/' in request.path %} 
-										class="menu-item active"
-										{% else %}
-										class="menu-item"
-										{% endif %}
-										><a href="{% url 'create_blog' %}" class="nav-link">New Blog</a></li>
+								        <li><a href="{% url 'list_blog' %}" class="nav-link" data-effect="Shop">Blog</a>
+										<li ><a href="{% url 'create_blog' %}" class="nav-link">New Blog</a></li>
 									</ul>
 								</li>
-								<li class="menu-item"><a href="#popular-books" class="nav-link" data-effect="Shop">Shop</a></li>
+								<li class="menu-item"><a href="#" class="nav-link" data-effect="Shop">Shop</a></li>
 								<li
 								{% if 'contact/' in request.path %} 
 								class="menu-item active"

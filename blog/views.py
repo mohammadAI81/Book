@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth.decorators import login_required
@@ -56,9 +58,9 @@ def create(request):
                 return redirect('detail_blog', blog.id)
             else:
                 return redirect('create_blog')
-    
-    
+
     return render(request, 'blog/create_edit.html')
+
 
 def edit(request, num):
     blog = get_object_or_404(Blog, id=num)
@@ -72,26 +74,26 @@ def edit(request, num):
         blog.status = request.POST['status']
         blog.save()
         return redirect('detail_blog', blog.id)
-    
-    
+
     context = {
         'blog': blog
     }
     
     return render(request, 'blog/create_edit.html', context)
 
+
 def delete(request, num):
     blog = get_object_or_404(Blog, id=num)
     if request.method == 'POST':
         status = request.POST['status']
         if status == 'Yes':
-            blog.photo.delete(save=True)
+            if blog.photo:
+                os.remove(blog.photo.path)
             blog.delete()
             return redirect('list_blog')
         else:
             return redirect('list_blog')
-        
-        
+
     context = {
         'blog': blog
     }
