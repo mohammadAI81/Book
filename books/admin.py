@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Book, Comment
+from .models import Book, Comment, Author
 
 
 @admin.register(Book)
@@ -18,3 +18,9 @@ class AdminComment(admin.ModelAdmin):
     ordering = ('-datetime_created',)
     list_per_page = 25
 
+
+@admin.register(Author)
+class AdminAuthor(admin.ModelAdmin):
+    list_display = ('author', 'biography',)
+    ordering = ('-datetime_created',)
+    list_per_page = 25
