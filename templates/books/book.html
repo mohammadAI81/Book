@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-{% block title %}  {% endblock %}
+{% load humanize %}
+
+{% block title %} | {{ book.title }} {% endblock %}
 
 
 {% block content %}
@@ -33,8 +35,9 @@
 
                 <div class="col-md-6 pl-5">
                     <div class="product-detail">
-                        <h1>{{ book.title }}</h1>
-                        <p>{{ book.author|title }}</p>
+                        <h1>Title: {{ book.title }}</h1>
+                        <p>Author: {{ book.author|title }}</p>
+                        <p>Price: {{ book.price|intcomma }}</p>
 
                         <p>{{ book.description|linebreaks }}</p>
 

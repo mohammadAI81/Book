@@ -1,13 +1,15 @@
+import os
+
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Book, Comment
+from .models import Book
 
 
 def books(request):
-    books = Book.objects.all()
+    book = Book.objects.all()
 
     context = {
-        'books': books,
+        'books': book,
     }
     return render(request, 'books/books.html', context)
 
@@ -31,7 +33,7 @@ def edit(request, pk):
 
 def detail(request, pk):
     book = get_object_or_404(Book, id=pk)
-    comments = book.comment_author.all()
+    comments = book.comment_book.all()
     context = {
         'book': book,
         'comments': comments
@@ -41,7 +43,13 @@ def detail(request, pk):
 
 def delete(request, pk):
     book = get_object_or_404(Book, id=pk)
+    if request.method == 'POST':
+        if request.POST['status'] == 'yes':
+            if book.photo:
+                os.remove(book.photo.path)
+            book.delete()
+            return redirect('home')
     context = {
         'book': book.title
     }
-    return render(request, 'books/', context)
+    return render(request, 'books/delete.html', context)

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}  {% endblock %}
+{% block title %} Delete {{ book.title }} {% endblock %}
 
 
 {% block content %}
@@ -7,7 +7,7 @@
         <div class="container">
             <form method="POST">
                 {% csrf_token %}
-                <h1>Do you want delete {{ blog.title }} ?</h1>
+                <h1>Do you want delete {{ book.title }} ?</h1>
                 <input class="btn btn-rounded btn-outline-dark" type="submit" value="Yes" name="status">
                 <input class="btn btn-rounded btn-outline-dark" type="submit" value="No" name="status">
             </form>
