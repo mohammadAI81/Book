@@ -21,6 +21,6 @@ class AdminComment(admin.ModelAdmin):
 
 @admin.register(Author)
 class AdminAuthor(admin.ModelAdmin):
-    list_display = ('author', 'biography',)
+    list_display = ('name', 'datetime_created',)
     ordering = ('-datetime_created',)
     list_per_page = 25

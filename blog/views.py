@@ -7,7 +7,7 @@ from .models import Blog, Comment
 
 
 def blogs(request):
-    blogs = Blog.objects.filter(status='pd').order_by('-datetime_created').all()
+    blog = Blog.objects.filter(status='pd').order_by('-datetime_created').all()
 
     context = {
         'blogs': blogs,
@@ -54,7 +54,8 @@ def create(request):
                 picture = request.FILES['picture']
             author = request.user
             if title and discription and status:
-                blog = Blog.objects.create(title=title, discription=discription, status=status, photo=picture, author=author)
+                blog = Blog.objects.create(title=title, discription=discription, status=status,
+                                           photo=picture, author=author)
                 return redirect('detail_blog', blog.id)
             else:
                 return redirect('create_blog')
@@ -68,6 +69,7 @@ def edit(request, num):
         if request.FILES:
             if blog.photo:   
                 blog.photo.delete()
+                os.remove(blog.photo.path)
             blog.photo = request.FILES['picture']
         blog.title = request.POST['title']
         blog.discription = request.POST['discription']

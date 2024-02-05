@@ -2,7 +2,7 @@ import os
 
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Book
+from .models import Book, Comment, Author
 
 
 def books(request):
@@ -15,15 +15,31 @@ def books(request):
 
 
 def create(request):
+    authors = Author.objects.all()
     if request.method == 'POST':
-        pass
-    return render(request, 'books/create_edit.html',)
+        author = request.POST['author']
+        title = request.POST['title']
+        description = request.POST['description']
+        price = request.POST['price']
+        if request.FILES:
+            picture = request.FILES['picture']
+        if author and title and description and price:
+            book = Book(author=author, title=title, description=description, price=price, photo=picture)
+            book.save()
+            return redirect('book_detail', book.id)
+        else:
+            return redirect('book_create')
+
+    context = {
+        'authors': authors
+    }
+    return render(request, 'books/create_edit.html', context)
 
 
 def edit(request, pk):
     book = get_object_or_404(Book, id=pk)
     if request.method == 'POST':
-        print(request.POST)
+        pass
 
     context = {
         'book': book

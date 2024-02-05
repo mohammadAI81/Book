@@ -10,9 +10,18 @@
                 <form method="POST" class="form-group mt-3" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
+                        <div class="col-md-12">
+                            <label for="author">Author</label>
+                            <select name="author" id="author" class="form-control mb-4 mr-4">
+                                <option value="">Select a author ...</option>
+                                {% for author in authors %}
+                                <option value="{{ author }}">{{ author.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                         <div class="col-md-6">
-                            <label for="author">Title</label>
-                            <input class="u-full-width form-control mb-4 mr-4" type="text" name="title" id="author"
+                            <label for="title">Title</label>
+                            <input class="u-full-width form-control mb-4 mr-4" type="text" name="title" id="title"
                                    placeholder="E.x My Title ..."
                                    value="{{ book.title }}">
                         </div>
