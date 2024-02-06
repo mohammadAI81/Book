@@ -1,7 +1,31 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard {{ user.username }}{% endblock title %}
+{% block title %} Dashboard {{ user.username }}{% endblock title %}
 
 {% block content %}
-    
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-title align-center">Dashboard {{ user.username|title }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <h1>blogs: </h1>
+        {% for blog in blogs %}
+            {{ blog.title }}
+        {% endfor %}
+        <h1>Comments: </h1>
+        {% for comment in comments_blog %}
+            {{ comment.blog }}
+        {% endfor %}
+        <br>
+        {% for comment in comments_book %}
+            {{ comment.book }}
+        {% endfor %}
+    </div>
+
 {% endblock content %}

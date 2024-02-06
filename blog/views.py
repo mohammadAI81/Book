@@ -10,7 +10,7 @@ def blogs(request):
     blog = Blog.objects.filter(status='pd').order_by('-datetime_created').all()
 
     context = {
-        'blogs': blogs,
+        'blogs': blog,
     }
     return render(request, 'blog/blogs.html', context)
 
@@ -18,7 +18,7 @@ def blogs(request):
 @login_required(login_url='/account/login/')
 def detail(request, num):
     blog = get_object_or_404(Blog, id=num)
-    comments = blog.book_comments.all()
+    comments = blog.blog_comments.all()
     
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -50,12 +50,12 @@ def create(request):
             title = request.POST['title']
             discription = request.POST['discription']
             status = request.POST['status']
-            if request.FILES:
-                picture = request.FILES['picture']
             author = request.user
             if title and discription and status:
-                blog = Blog.objects.create(title=title, discription=discription, status=status,
-                                           photo=picture, author=author)
+                blog = Blog(title=title, discription=discription, status=status, author=author)
+                if request.FILES:
+                    blog.photo = request.FILES['picture']
+                blog.save()
                 return redirect('detail_blog', blog.id)
             else:
                 return redirect('create_blog')

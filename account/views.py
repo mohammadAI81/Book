@@ -3,6 +3,8 @@ from django.contrib import auth
 from django.conf import settings
 from .models import CustomAdmin
 
+from blog.models import Blog, Comment
+from books.models import Comment as Com
 
 # def login(request):
 #     if request.method == 'POST':
@@ -41,9 +43,20 @@ def signup(request):
             return redirect('signup')
     return render(request, 'registration/signup.html')
 
+
 def dashboard(request):
-    
-    return
+    user = request.user
+    blog = Blog.objects.filter(author=user)
+    comments_blog = Comment.objects.filter(author=user)
+    comments_book = Com.objects.filter(author=user)
+
+    context = {
+        'blogs': blog,
+        'comments_blog': comments_blog,
+        'comments_book': comments_book,
+    }
+    return render(request, 'registration/dashboard.html', context)
+
 
 def logout(request):
     auth.logout(request)    

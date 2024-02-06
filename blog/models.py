@@ -10,7 +10,8 @@ class Blog(models.Model):
         (STATUS_DRA, 'Draft'),
     )
 
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='auhtor_blog', null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='auhtor_blog',
+                               null=True)
     photo = models.FileField(upload_to='blog/cover/%Y/%m', blank=True)
     title = models.CharField(max_length=255)
     discription = models.TextField()
@@ -24,7 +25,7 @@ class Blog(models.Model):
     
 class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='auhtor_comments')
-    book = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='book_comments')
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='blog_comments', null=True)
     text = models.TextField()
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)

@@ -17,14 +17,14 @@ def books(request):
 def create(request):
     authors = Author.objects.all()
     if request.method == 'POST':
-        author = request.POST['author']
+        author = Author.objects.get(name=request.POST['author'])
         title = request.POST['title']
         description = request.POST['description']
         price = request.POST['price']
-        if request.FILES:
-            picture = request.FILES['picture']
         if author and title and description and price:
-            book = Book(author=author, title=title, description=description, price=price, photo=picture)
+            book = Book(author=author, title=title, description=description, price=price)
+            if picture := request.FILES:
+                book.photo = picture
             book.save()
             return redirect('book_detail', book.id)
         else:
@@ -39,7 +39,16 @@ def create(request):
 def edit(request, pk):
     book = get_object_or_404(Book, id=pk)
     if request.method == 'POST':
-        pass
+        author = request.POST['author']
+        title = request.POST['title']
+        description = request.POST['description']
+        price = request.POST['price']
+        if picture := request.FILES:
+            book.photo.delete()
+            os.remove(book.photo.path)
+            book.photo = picture
+        book.objects.update(author=author, title=title, description=description, price=price)
+        return redirect('book_detail', book.id)
 
     context = {
         'book': book

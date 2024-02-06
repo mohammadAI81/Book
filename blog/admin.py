@@ -16,9 +16,9 @@ class BlogAdmin(ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(ModelAdmin):
-    list_display = ('author', 'book', 'datetime_created')
-    list_editable = ('book',)
+    list_display = ('author', 'blog', 'datetime_created')
+    list_editable = ('blog',)
     list_per_page = 25
-    ordering = ('book',)
+    ordering = ('blog',)
     readonly_fields = ('datetime_created', 'datetime_modified')
     
