@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %} {{ author.name }} {% endblock %}
+
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumbs">
+                        <span class="item"><a href="{% url 'home' %}">Home /</a></span>
+                        <span class="item">{{ author.name|title }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-sand padding-large">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-6 pl-5">
+                    <div class="product-detail">
+                        <h1>Name: {{ author.name|title }}</h1>
+                        <p>{{ author.biography|linebreaks }}</p>
+
+                        {% if user.is_staff %}
+                        <a href="#" class="btn btn-outline-dark btn-rounded">Edit</a>
+                        <a href="#" class="btn btn-outline-dark btn-rounded">Delete</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Comment block -->
+    <section class="padding-large">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--show Comment-->
+                    <section class="comments-wrap mb-4">
+                        {% if comments %}
+                        <h3>Comments</h3>
+                        <div class="comment-list mt-4">
+                            {% for comment in comments %}
+                            <article class="flex-container d-flex mb-3">
+                                <img src="https://www.ascian.in/creatives/wp-content/uploads/blog-700x410.jpg" style="height: 80px;border-radius: 50%;width: 80px;"
+                                 alt="default" class="commentorImg">
+                                <div class="author-post">
+                                    <div class="comment-meta d-flex">
+                                        <h4>{{ comment.author.username }}</h4>
+                                        <span class="meta-date">{{ comment.datetime_created|date:"M Y d" }} |</span>
+                                        <small class="comments-reply"><a href="#"><i class="icon icon-mail-reply"></i>Reply</a></small>
+                                    </div><!--meta-tags-->
+                                    <p>{{ comment.text|linebreaks }}</p>
+                                </div>
+                            </article><!--flex-container-->
+                            {% endfor %}
+                        </div><!--comment-list-->
+                        {% else %}
+                            <h3>We don't have comments. Sorry!</h3>
+                        {% endif %}
+                    </section>
+                    <hr>
+                    <!--endshow Comment-->
+                    <section class="comment-respond  mb-5">
+                        <h3>Leave a Comment</h3>
+                        <form method="POST" class="form-group mt-3">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input class="u-full-width" type="text" name="author" id="author" class="form-control mb-4 mr-4"
+                                    {% if user.is_authenticated %}
+                                    placeholder="{{ user.username }}" readonly
+                                    {% else %}
+                                    placeholder="Your full name"
+                                    {% endif %}
+                                    required >
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="u-full-width" type="email" name="email" id="email" class="form-control mb-4"
+                                    {% if user.is_authenticated %}
+                                    placeholder="{{ user.email }}" readonly
+                                    {% else %}
+                                    placeholder="E-mail Address"
+                                    {% endif %}
+                                    required >
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <textarea class="u-full-width" id="comment" class="form-control mb-4" style="height: 150px;"
+                                    name="comment" placeholder="Write your comment here" rows="20" required></textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="btn btn-rounded btn-large btn-full" type="submit"
+                                    {% if user.is_authenticated %}
+                                    value="Submit"
+                                    {% else %}
+                                    value="First Login" disabled
+                                    {% endif %}
+                                    >
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!--Comment end block -->
+{% endblock content %}

@@ -6,7 +6,7 @@ from .models import Book, Comment, Author
 
 
 def books(request):
-    book = Book.objects.all()
+    book = Book.objects.order_by('-datetime_created').all()
 
     context = {
         'books': book,
@@ -78,3 +78,23 @@ def delete(request, pk):
         'book': book.title
     }
     return render(request, 'books/delete.html', context)
+
+
+def authors(request):
+    author = Author.objects.order_by('-datetime_created').all()
+
+    context = {
+        'authors': author
+    }
+
+    return render(request, 'books/authors.html', context)
+
+
+def author(request, pk):
+    authorid = Author.objects.get(id=pk)
+
+    context = {
+        'author': authorid
+    }
+
+    return render(request, 'books/author.html', context)

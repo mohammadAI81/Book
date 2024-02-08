@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %} Authors {% endblock %}
+
+{% block content %}
+    <section class="hero-section jarallax">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-15">
+                    <h1 class="page-title">Authors</h1>
+                    <div class="breadcrumbs">
+                        <span class="item"><a href="{% url 'home' %}">Home /</a></span>
+                        <span class="item">Authors</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="latest-blog" class="scrollspy-section padding-large">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- post grid -->
+                    {% if authors %}
+                        <div class="post-grid">
+                            <div class="row">
+                                {% for author in authors %}
+                                    <div class="col-md-4">
+                                        <article class="post-item">
+                                            <div class="post-content">
+                                                <div class="meta-date">{{ author.datetime_created|date:'M d, Y' }}</div>
+                                                <h3 class="post-title"><a
+                                                        href="{% url 'author' author.id %}">{{ author.name|title }}</a>
+                                                </h3>
+                                                <p>{{ author.biography|truncatewords:10 }}</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <h3 class="post-title">We Don't Have Books</h3>
+                    {% endif %}
+                    <!-- post grid -->
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

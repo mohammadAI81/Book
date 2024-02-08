@@ -72,7 +72,7 @@
 								<li style="cursor: pointer"><a>Book</a>
 									<ul class="menu-list">
 									    <li><a href="{% url 'books' %}" class="nav-link" data-effect="Books">Books</a></li>
-								        <li><a href="#" class="nav-link">Authors</a></li>
+								        <li><a href="{% url 'authors' %}" class="nav-link">Authors</a></li>
                                         {% if user.is_authenticated %}
 								        <li><a href="{% url 'book_create' %}" class="nav-link">New Book</a></li>
                                         {% endif %}
