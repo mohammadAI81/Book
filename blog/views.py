@@ -7,7 +7,7 @@ from .models import Blog, Comment
 
 
 def blogs(request):
-    blog = Blog.objects.filter(status='pd').order_by('-datetime_created').all()
+    blog = Blog.objects.filter(status='pd').order_by('-datetime_created')
 
     context = {
         'blogs': blog,

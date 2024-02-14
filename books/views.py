@@ -23,7 +23,7 @@ def create(request):
         price = request.POST['price']
         if author and title and description and price:
             book = Book(author=author, title=title, description=description, price=price)
-            if picture := request.FILES:
+            if picture := request.FILES['picture']:
                 book.photo = picture
             book.save()
             return redirect('book_detail', book.id)
@@ -39,19 +39,22 @@ def create(request):
 def edit(request, pk):
     book = get_object_or_404(Book, id=pk)
     if request.method == 'POST':
-        author = request.POST['author']
-        title = request.POST['title']
-        description = request.POST['description']
-        price = request.POST['price']
-        if picture := request.FILES:
-            book.photo.delete()
-            os.remove(book.photo.path)
+        book.author = Author.objects.get(name=request.POST['author'])
+        book.title = request.POST['title']
+        book.description = request.POST['description']
+        book.price = request.POST['price']
+        if picture := request.FILES['picture']:
+            if book.photo:
+                os.remove(book.photo.path)
+                book.photo.delete()
             book.photo = picture
-        book.objects.update(author=author, title=title, description=description, price=price)
+        book.save()
         return redirect('book_detail', book.id)
 
+    authors = Author.objects.all()
     context = {
-        'book': book
+        'book': book,
+        'authors': authors
     }
     return render(request, 'books/create_edit.html', context)
 
@@ -98,3 +101,4 @@ def author(request, pk):
     }
 
     return render(request, 'books/author.html', context)
+

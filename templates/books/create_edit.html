@@ -1,59 +1,73 @@
 {% extends 'base.html' %}
-{% block title %} Create Book {% endblock %}
+{% load humanize %}
+
+
+{% block title %}
+{% if book %}
+     Edit {{ book.title|title }}
+{% else %}
+     Create Book
+{% endif %}
+{% endblock %}
 
 
 {% block content %}
     <section class="padding-large">
-        <div class="container">
-            <section class="comment-respond  mb-5">
-                <h2>New Book</h2>
-                <form method="POST" class="form-group mt-3" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label for="author">Author</label>
-                            <select name="author" id="author" class="form-control mb-4 mr-4">
-                                <option value="">Select a author ...</option>
-                                {% for author in authors %}
-                                <option value="{{ author }}">{{ author.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="title">Title</label>
-                            <input class="u-full-width form-control mb-4 mr-4" type="text" name="title" id="title"
-                                   placeholder="E.x My Title ..."
-                                   value="{{ book.title }}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="picture">Upload Picture {% if book.photo %}| Currently:
-                                {{ book.photo.name }}{% endif %}</label>
-                            <input type="file" name="picture">
-                        </div>
-                        <div class="col-md-12">
-                            <label for="comment">Description</label>
-                            <textarea class="u-full-width form-control" id="comment" name="description"
-                                      placeholder="Write your description ..." style="height: 300px;"
-                                      rows="50" required>{{ book.description }}</textarea>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="num">Price [A thousand rials]</label>
-                            <input type="number" id="num" name="price" placeholder="" max="10000">
-                        </div>
-                        <div class="col-md-6">
-                            <input class="btn btn-rounded btn-large btn-full" type="submit"
-                                    {% if book and user.is_authenticated %}
-                                   value="Edit"
-                                    {% elif user.is_authenticated %}
-                                   value="Create"
-                                    {% else %}
-                                   value="First Login" disabled
-                                    {% endif %}
-                            >
-                        </div>
+    <div class="container">
+        <section class="comment-respond  mb-5">
+            <h2>New Book</h2>
+            <form method="POST" class="form-group mt-3" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="author">Author</label>
+                        <select name="author" id="author" class="form-control mb-4 mr-4">
+                            <option value="">Select a author ...</option>
+                            {% for author in authors %}
+                                {% if book.author.name == author.name %}
+                                    <option value="{{ author }}" selected>{{ author.name }}</option>
+                                {% else %}
+                                    <option value="{{ author }}">{{ author.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
                     </div>
-                </form>
-            </section>
-        </div>
+                    <div class="col-md-6">
+                        <label for="title">Title</label>
+                        <input class="u-full-width form-control mb-4 mr-4" type="text" name="title" id="title"
+                               placeholder="E.x My Title ..."
+                               value="{{ book.title }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="picture">Upload Picture {% if book.photo %}| Currently:
+                            {{ book.photo.name }}{% endif %}</label>
+                        <input type="file" name="picture">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="comment">Description</label>
+                        <textarea class="u-full-width form-control" id="comment" name="description"
+                                  placeholder="Write your description ..." style="height: 300px;"
+                                  rows="50" required>{{ book.description }}</textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="num">Price [A thousand rials]</label>
+                        <input type="number" id="num" name="price" placeholder="Price ..."
+                               value="{{ book.price }}">
+                    </div>
+                    <div class="col-md-6">
+                        <input class="btn btn-rounded btn-large btn-full" type="submit"
+                                {% if book and user.is_authenticated %}
+                               value="Edit"
+                                {% elif user.is_authenticated %}
+                               value="Create"
+                                {% else %}
+                               value="First Login" disabled
+                                {% endif %}
+                        >
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
     <section>
 {% endblock content %}
