@@ -5,6 +5,43 @@
 
 {% block content %}
     {% if books %}
+    <section id="billboard">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+    
+                    <button class="prev slick-arrow">
+                        <i class="icon icon-arrow-left"></i>
+                    </button>
+                    <div class="main-slider pattern-overlay">
+                        {% for book in books %}
+                        <div class="slider-item">
+                            <div class="banner-content">
+                                <h2 class="banner-title">{{book.title}}</h2>
+                                <p>{{ book.description|linebreaks }}</p>
+                                <div class="btn-wrap">
+                                    <a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i class="icon icon-ns-arrow-right"></i></a>
+                                </div>
+                            </div><!--banner-content--> 
+                            <img src="{{ book.photo.url }}" alt="banner" class="banner-image">
+                        </div><!--slider-item-->
+                        {% endfor %}
+                        
+                        
+                    </div><!--slider-->
+                        
+                    <button class="next slick-arrow">
+                        <i class="icon icon-arrow-right"></i>
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+
     <section id="featured-books">
 	<div class="container">
 		<div class="row">
@@ -24,7 +61,7 @@
 					<div class="col-md-3">
 						<figure class="product-style">
 							<img
-                                {% if blog.photo %}
+                                {% if book.photo %}
                                 src="{{ book.photo.url }}"
                                 {% else %}
                                 src="https://shop.bl.uk/cdn/shop/products/BibliophileNotebookWEBI_200x.jpg?v=1666777808"
@@ -125,7 +162,7 @@
                                     <div class="meta-date">{{ blog.datetime_created }}</div>			
                                     <h3><a href="{% url 'detail_blog' blog.id %}">{{ blog.title|title }}</a></h3>
 
-                                    <!--<div class="links-element">
+                                    <div class="links-element">
                                         <div class="categories">inspiration</div>
                                         <div class="social-links">
                                             <ul>
@@ -140,7 +177,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>links-element-->
+                                    </div><!--links-element-->
 
                                 </div>
                             </article>

@@ -43,11 +43,11 @@ def edit(request, pk):
         book.title = request.POST['title']
         book.description = request.POST['description']
         book.price = request.POST['price']
-        if picture := request.FILES['picture']:
+        if request.FILES:
             if book.photo:
                 os.remove(book.photo.path)
                 book.photo.delete()
-            book.photo = picture
+            book.photo = request.FILES['picture']
         book.save()
         return redirect('book_detail', book.id)
 
@@ -72,7 +72,7 @@ def detail(request, pk):
 def delete(request, pk):
     book = get_object_or_404(Book, id=pk)
     if request.method == 'POST':
-        if request.POST['status'] == 'yes':
+        if request.POST['status'] == 'Yes':
             if book.photo:
                 os.remove(book.photo.path)
             book.delete()
