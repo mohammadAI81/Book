@@ -14,18 +14,50 @@
     </section>
 
     <div class="container">
-        <h1>blogs: </h1>
-        {% for blog in blogs %}
-            {{ blog.title }}
-        {% endfor %}
-        <h1>Comments: </h1>
-        {% for comment in comments_blog %}
-            {{ comment.blog }}
-        {% endfor %}
-        <br>
-        {% for comment in comments_book %}
-            {{ comment.book }}
-        {% endfor %}
+        <div class="row">
+			<div class="col-md-12">
+				
+				<hr>
+
+				<h3>Comments</h3>
+				<table class="u-full-width">
+                    <thead>
+                        <tr>
+                        <th>Blog</th>
+                        <th>Text</th>
+                        <th>Time Ago</th>
+                        </tr>
+                    </thead>
+				    <tbody>
+                        {% for comments_blog in comments_blogs %}
+                        <tr>
+                            <td>{{ comments_blog.blog }}</td>
+                            <td>{{ comments_blog.text|truncatechars:15 }}</td>
+                            <td>{{ comments_blog.datetime_created|timesince }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th>Book</th>
+                            <th>Text</th>
+                            <th>Time Ago</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comments_book in comments_books %}
+                        <tr>
+                            <td>{{ comments_book.book }}</td>
+                            <td>{{ comments_book.text|truncatechars:15 }}</td>
+                            <td>{{ comments_book.datetime_created|timesince }}</td>
+                        </tr>
+                        {% endfor %}
+				    </tbody>
+				</table>
+			</div>
+			
+		</div>
+        
     </div>
 
 {% endblock content %}

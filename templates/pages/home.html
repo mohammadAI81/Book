@@ -43,59 +43,60 @@
 
 
     <section id="featured-books">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
 
-			<div class="section-header align-center">
-				<div class="title">
-					<span>Some quality items</span>
-				</div>
-				<h2 class="section-title">Featured Books</h2>
-			</div>
+                <div class="section-header align-center">
+                    <div class="title">
+                        <span>Some quality items</span>
+                    </div>
+                    <h2 class="section-title">Featured Books</h2>
+                </div>
 
-			<div class="product-list" data-aos="fade-up">
-				<div class="row">
+                <div class="product-list" data-aos="fade-up">
+                    <div class="row">
 
-                    {% for book in books %}
-					<div class="col-md-3">
-						<figure class="product-style">
-							<img
-                                {% if book.photo %}
-                                src="{{ book.photo.url }}"
-                                {% else %}
-                                src="https://shop.bl.uk/cdn/shop/products/BibliophileNotebookWEBI_200x.jpg?v=1666777808"
-                                {% endif %}
-                                style="border-radius: 10px;"
-                                 alt="Books" class="product-item">
-								<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-							<figcaption>
-								<h3> {{ book.title }} </h3>
-								<p> {{ book.author }} </p>
-								<div class="item-price"> {{ book.price|intcomma }}  </div>
-							</figcaption>
-						</figure>
-					</div>
-                    {% endfor %}
+                        {% for book in books %}
+                        <div class="col-md-3">
+                            <figure class="product-style">
+                                <img
+                                    {% if book.photo %}
+                                    src="{{ book.photo.url }}"
+                                    {% else %}
+                                    src="https://shop.bl.uk/cdn/shop/products/BibliophileNotebookWEBI_200x.jpg?v=1666777808"
+                                    {% endif %}
+                                    style="border-radius: 10px;"
+                                    alt="Books" class="product-item">
+                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
+                                <figcaption>
+                                    <h3> {{ book.title }} </h3>
+                                    <p> {{ book.author }} </p>
+                                    <div class="item-price"> {{ book.price|intcomma }}  </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        {% endfor %}
 
-			    </div><!--ft-books-slider-->
-			</div><!--grid-->
+                    </div><!--ft-books-slider-->
+                </div><!--grid-->
 
 
-			</div><!--inner-content-->
-		</div>
+                </div><!--inner-content-->
+            </div>
 
-		<div class="row">
-			<div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
 
-				<div class="btn-wrap align-right">
-					<a href="{% url 'books' %}" class="btn-accent-arrow">View all products <i class="icon icon-ns-arrow-right"></i></a>
-				</div>
+                    <div class="btn-wrap align-right">
+                        <a href="{% url 'books' %}" class="btn-accent-arrow">View all products <i class="icon icon-ns-arrow-right"></i></a>
+                    </div>
 
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
     </section>
+
     {% endif %}
     <section id="subscribe">
         <div class="container">

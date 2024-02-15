@@ -4,7 +4,7 @@ from django.conf import settings
 from .models import CustomAdmin
 
 from blog.models import Blog, Comment
-from books.models import Comment as Com
+from books.models import Comment as book_cm
 
 # def login(request):
 #     if request.method == 'POST':
@@ -46,14 +46,12 @@ def signup(request):
 
 def dashboard(request):
     user = request.user
-    blog = Blog.objects.filter(author=user)
-    comments_blog = Comment.objects.filter(author=user)
-    comments_book = Com.objects.filter(author=user)
+    comments_blog = user.auhtor_comments.all()
+    comments_book = user.comment_author.all()
 
     context = {
-        'blogs': blog,
-        'comments_blog': comments_blog,
-        'comments_book': comments_book,
+        'comments_blogs': comments_blog,
+        'comments_books': comments_book,
     }
     return render(request, 'registration/dashboard.html', context)
 
