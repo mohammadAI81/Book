@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}| {{ blog.title }}{% endblock title %}
+{% block title %}{{ blog.title }}{% endblock title %}
 
 
 
@@ -8,7 +8,7 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">			
+                <div class="col-md-12">
                     <div class="breadcrumbs">
                         <span class="item"><a href="{% url 'home' %}">Home /</a></span>
                         <span class="item">{{ blog.title }}</span>
@@ -24,11 +24,11 @@
 
                 <div class="col-md-6">
                     <a href="{% url 'detail_blog' blog.id %}" class="product-image">
-                        <img 
+                        <img
                         {% if blog.photo %}
-                        src="{{ blog.photo.url }}" 
+                        src="{{ blog.photo.url }}"
                         {% else %}
-                        src="https://www.ascian.in/creatives/wp-content/uploads/blog-700x410.jpg" 
+                        src="https://www.ascian.in/creatives/wp-content/uploads/blog-700x410.jpg"
                         {% endif %}
                         style="border-radius: 10px;"></a>
                 </div>
@@ -42,91 +42,80 @@
 
                         <a href="{% url 'edit_blog' blog.id %}" class="btn btn-outline-dark btn-rounded">Edit</a>
                         <a href="{% url 'delete_blog' blog.id %}" class="btn btn-outline-dark btn-rounded">Delete</a>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    
-    <!-- Comment block -->
     <section class="padding-large">
         <div class="container">
+
             <div class="row">
                 <div class="col-md-12">
-                    <!--show Comment-->
-                    <section class="comments-wrap mb-4">
-                        {% if comments %}
+                    {% if comments %}
+                        <section class="comments-wrap mb-4">
                         <h3>Comments</h3>
                         <div class="comment-list mt-4">
                             {% for comment in comments %}
-                            <article class="flex-container d-flex mb-3">
-                                <img src="https://www.ascian.in/creatives/wp-content/uploads/blog-700x410.jpg" style="height: 80px;border-radius: 50%;width: 80px;"
-                                 alt="default" class="commentorImg">
-                                <div class="author-post">
-                                    <div class="comment-meta d-flex">
-                                        <h4>{{ comment.author.username }}</h4>
-                                        <span class="meta-date">{{ comment.datetime_created|date:"M Y d" }} |</span>
-                                        <small class="comments-reply"><a href="#"><i class="icon icon-mail-reply"></i>Reply</a></small>
-                                    </div><!--meta-tags-->
-                                    <p>{{ comment.text|linebreaks }}</p>
-                                </div>
-                            </article><!--flex-container-->
+                                <img src="images/default.png" alt="default" class="commentorImg">
+                                <article class="flex-container d-flex mb-3 pt-4">
+                                    <div class="author-post">
+                                        <h4>{{ comment.author}}</h4>
+                                        <div class="comment-meta d-flex">
+                                            <span class="meta-date">{{ blog.datetime_created|date:"M d,Y"}} <a href="#">Reply</a></span>
+
+                                        </div><!--meta-tags-->
+
+                                        <p>{{ blog.discription|linebreaks }}</p>
+                                    </div>
+
+                                </article><!--flex-container-->
                             {% endfor %}
+
                         </div><!--comment-list-->
-                        {% else %}
-                            <h3>We don't have comments. Sorry!</h3>
-                        {% endif %}
+
                     </section>
-                    <hr>
-                    <!--endshow Comment-->
-                    <section class="comment-respond  mb-5">			
+                    {% endif %}
+
+                    <section class="comment-respond  mb-5">
                         <h3>Leave a Comment</h3>
-                        <form method="POST" class="form-group mt-3">
-                            {% csrf_token %}
+                        <form method="post" class="form-group mt-3">
+
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input class="u-full-width" type="text" name="author" id="author" class="form-control mb-4 mr-4"
-                                    {% if user.is_authenticated %} 
-                                    placeholder="{{ user.username }}" readonly
-                                    {% else %}
-                                    placeholder="Your full name"
-                                    {% endif %}
-                                    required >
+                                    <label for="author">Author :</label>
+                                    <input class="u-full-width" type="text" name="author" id="author"
+                                           class="form-control mb-4 mr-4"  placeholder="Your full name"
+                                           value="{{ user.username }}" readonly>
                                 </div>
                                 <div class="col-md-6">
-                                    <input class="u-full-width" type="email" name="email" id="email" class="form-control mb-4"  
-                                    {% if user.is_authenticated %} 
-                                    placeholder="{{ user.email }}" readonly
-                                    {% else %}
-                                    placeholder="E-mail Address"
-                                    {% endif %}
-                                    required >
-
+                                    <label for="email">Email :</label>
+                                    <input class="u-full-width" type="email" name="email" id="email"
+                                           class="form-control mb-4"  placeholder="E-mail Address"
+                                           value="{{ user.email }}" readonly="">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <textarea class="u-full-width" id="comment" class="form-control mb-4" style="height: 150px;"
-                                    name="comment" placeholder="Write your comment here" rows="20" required></textarea>
+                                    <label for="comment">Comment :</label>
+                                    <textarea class="u-full-width form-control mb-4" id="comment"
+                                              name="comment" placeholder="Write your comment here"
+                                              style="height: 300px"
+                                    ></textarea>
                                 </div>
                                 <div class="col-md-12">
-                                    <input class="btn btn-rounded btn-large btn-full" type="submit" 
-                                    {% if user.is_authenticated %} 
-                                    value="Submit"
-                                    {% else %}
-                                    value="First Login" disabled
-                                    {% endif %}
-                                    >
+                                    <input class="btn btn-rounded btn-large btn-full" type="submit" value="Submit">
                                 </div>
                             </div>
+
                         </form>
                     </section>
+
                 </div>
             </div>
         </div>
     </section>
-    <!-- Comment endblock -->
 {% endblock content %}
