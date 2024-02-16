@@ -16,9 +16,7 @@
     <div class="container">
         <div class="row">
 			<div class="col-md-12">
-				
-				<hr>
-
+                <br>
 				<h3>Comments</h3>
 				<table class="u-full-width">
                     <thead>
@@ -29,30 +27,34 @@
                         </tr>
                     </thead>
 				    <tbody>
-                        {% for comments_blog in comments_blogs %}
+                        {% for comment in comments %}
                         <tr>
-                            <td>{{ comments_blog.blog }}</td>
-                            <td>{{ comments_blog.text|truncatechars:15 }}</td>
-                            <td>{{ comments_blog.datetime_created|timesince }}</td>
+                            <td>{{ comment.blog }}</td>
+                            <td>{{ comment.text|truncatechars:15 }}</td>
+                            <td>{{ comment.datetime_created|timesince }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
+				</table>
+                <br>
+                <h3>Blog</h3>
+				<table class="u-full-width">
                     <thead>
                         <tr>
-                            <th>Book</th>
-                            <th>Text</th>
-                            <th>Time Ago</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Time Ago</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {% for comments_book in comments_books %}
+				    <tbody>
+                        {% for blog in blogs %}
                         <tr>
-                            <td>{{ comments_book.book }}</td>
-                            <td>{{ comments_book.text|truncatechars:15 }}</td>
-                            <td>{{ comments_book.datetime_created|timesince }}</td>
+                            <td>{{ blog.title }}</td>
+                            <td>{{ blog.discription|truncatechars:15 }}</td>
+                            <td>{{ blog.datetime_created|timesince }}</td>
                         </tr>
                         {% endfor %}
-				    </tbody>
+                    </tbody>
 				</table>
 			</div>
 			

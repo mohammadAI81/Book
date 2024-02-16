@@ -46,10 +46,12 @@ def signup(request):
 
 def dashboard(request):
     user = request.user
-    comments_blog = user.auhtor_comments.all()
+    comments_blog = user.author_comments.all()
+    blogs = user.auhtor_blog.all()
 
     context = {
-        'comments_blogs': comments_blog,
+        'comments': comments_blog,
+        'blogs': blogs
     }
     return render(request, 'registration/dashboard.html', context)
 
