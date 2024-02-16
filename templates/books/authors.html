@@ -29,11 +29,12 @@
                                     <div class="col-md-4">
                                         <article class="post-item">
                                             <div class="post-content">
+                                                <hr>
                                                 <div class="meta-date">{{ author.datetime_created|date:'M d, Y' }}</div>
                                                 <h3 class="post-title"><a
                                                         href="{% url 'author' author.id %}">{{ author.name|title }}</a>
                                                 </h3>
-                                                <p>{{ author.biography|truncatewords:10 }}</p>
+                                                <p>{{ author.biography|truncatewords:6 }}</p>
                                             </div>
                                         </article>
                                     </div>

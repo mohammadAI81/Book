@@ -1,8 +1,9 @@
 import os
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
-from .models import Book, Comment, Author
+from .models import Book, Author
 
 
 def books(request):
@@ -59,12 +60,11 @@ def edit(request, pk):
     return render(request, 'books/create_edit.html', context)
 
 
+@login_required(login_url='/account/login/')
 def detail(request, pk):
     book = get_object_or_404(Book, id=pk)
-    comments = book.comment_book.all()
     context = {
         'book': book,
-        'comments': comments
     }
     return render(request, 'books/book.html', context)
 

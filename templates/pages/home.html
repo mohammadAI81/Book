@@ -5,97 +5,101 @@
 
 {% block content %}
     {% if books %}
-    <section id="billboard">
+        <section id="billboard">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-    
-                    <button class="prev slick-arrow">
-                        <i class="icon icon-arrow-left"></i>
-                    </button>
-                    <div class="main-slider pattern-overlay">
-                        {% for book in books %}
-                        <div class="slider-item">
-                            <div class="banner-content">
-                                <h2 class="banner-title">{{book.title}}</h2>
-                                <p>{{ book.description|linebreaks }}</p>
-                                <div class="btn-wrap">
-                                    <a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i class="icon icon-ns-arrow-right"></i></a>
-                                </div>
-                            </div><!--banner-content--> 
-                            <img src="{{ book.photo.url }}" alt="banner" class="banner-image">
-                        </div><!--slider-item-->
-                        {% endfor %}
-                        
-                        
-                    </div><!--slider-->
-                        
-                    <button class="next slick-arrow">
-                        <i class="icon icon-arrow-right"></i>
-                    </button>
-                    
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <button class="prev slick-arrow">
+                            <i class="icon icon-arrow-left"></i>
+                        </button>
+                        <div class="main-slider pattern-overlay">
+                            {% for book in books %}
+                                <div class="slider-item">
+                                    <div class="banner-content">
+                                        <h2 class="banner-title">{{ book.title }}</h2>
+                                        <p>{{ book.description|linebreaks }}</p>
+                                        <div class="btn-wrap">
+                                            <a href="{% url 'book_detail' book.id %}" class="btn btn-outline-accent btn-accent-arrow">Read More<i
+                                                    class="icon icon-ns-arrow-right"></i></a>
+                                        </div>
+                                    </div><!--banner-content-->
+                                    <img src="{{ book.photo.url }}" alt="banner" class="banner-image">
+                                </div><!--slider-item-->
+                            {% endfor %}
+
+
+                        </div><!--slider-->
+
+                        <button class="next slick-arrow">
+                            <i class="icon icon-arrow-right"></i>
+                        </button>
+
+                    </div>
                 </div>
             </div>
-        </div>
-        
-    </section>
+
+        </section>
 
 
-    <section id="featured-books">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
+        <section id="featured-books">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
 
-                <div class="section-header align-center">
-                    <div class="title">
-                        <span>Some quality items</span>
-                    </div>
-                    <h2 class="section-title">Featured Books</h2>
-                </div>
-
-                <div class="product-list" data-aos="fade-up">
-                    <div class="row">
-
-                        {% for book in books %}
-                        <div class="col-md-3">
-                            <figure class="product-style">
-                                <img
-                                    {% if book.photo %}
-                                    src="{{ book.photo.url }}"
-                                    {% else %}
-                                    src="https://shop.bl.uk/cdn/shop/products/BibliophileNotebookWEBI_200x.jpg?v=1666777808"
-                                    {% endif %}
-                                    style="border-radius: 10px;"
-                                    alt="Books" class="product-item">
-                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-                                <figcaption>
-                                    <h3> {{ book.title }} </h3>
-                                    <p> {{ book.author }} </p>
-                                    <div class="item-price"> {{ book.price|intcomma }}  </div>
-                                </figcaption>
-                            </figure>
+                        <div class="section-header align-center">
+                            <div class="title">
+                                <span>Some quality items</span>
+                            </div>
+                            <h2 class="section-title">Featured Books</h2>
                         </div>
-                        {% endfor %}
 
-                    </div><!--ft-books-slider-->
-                </div><!--grid-->
+                        <div class="product-list" data-aos="fade-up">
+                            <div class="row">
+
+                                {% for book in books %}
+                                    <div class="col-md-3">
+                                        <figure class="product-style">
+                                            <img
+                                                    {% if book.photo %}
+                                                        src="{{ book.photo.url }}"
+                                                    {% else %}
+                                                        src="https://shop.bl.uk/cdn/shop/products/BibliophileNotebookWEBI_200x.jpg?v=1666777808"
+                                                    {% endif %}
+                                                        style="border-radius: 10px;"
+                                                        alt="Books" class="product-item">
+                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart">
+                                                Add to Cart
+                                            </button>
+                                            <figcaption>
+                                                <h3> {{ book.title }} </h3>
+                                                <p> {{ book.author }} </p>
+                                                <div class="item-price"> {{ book.price|intcomma }}  </div>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                {% endfor %}
+
+                            </div><!--ft-books-slider-->
+                        </div><!--grid-->
 
 
-                </div><!--inner-content-->
-            </div>
+                    </div><!--inner-content-->
+                </div>
 
-            <div class="row">
-                <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
 
-                    <div class="btn-wrap align-right">
-                        <a href="{% url 'books' %}" class="btn-accent-arrow">View all products <i class="icon icon-ns-arrow-right"></i></a>
+                        <div class="btn-wrap align-right">
+                            <a href="{% url 'books' %}" class="btn-accent-arrow">View all products <i
+                                    class="icon icon-ns-arrow-right"></i></a>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     {% endif %}
     <section id="subscribe">
@@ -116,89 +120,90 @@
                                     {% csrf_token %}
                                     <input type="text" name="email" placeholder="Enter your email addresss here">
                                     <button class="btn-subscribe">
-                                        <span>send</span> 
+                                        <span>send</span>
                                         <i class="icon icon-send"></i>
                                     </button>
                                 </form>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     {% if blogs %}
-    <section id="latest-blog">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
+        <section id="latest-blog">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
 
-                    <div class="section-header align-center">
-                        <div class="title">
-                            <span>Read our articles</span>
+                        <div class="section-header align-center">
+                            <div class="title">
+                                <span>Read our articles</span>
+                            </div>
+                            <h2 class="section-title">Latest Articles</h2>
                         </div>
-                        <h2 class="section-title">Latest Articles</h2>
-                    </div>
 
-                    <div class="row">
-                        {% for blog in blogs %}
-                        <div class="col-md-4">
+                        <div class="row">
+                            {% for blog in blogs %}
+                                <div class="col-md-4">
 
-                            <article class="column" data-aos="fade-up">
+                                    <article class="column" data-aos="fade-up">
 
-                                <figure>
-                                    <a href="{% url 'detail_blog' blog.id %}" class="image-hvr-effect">
-                                        <img 
-                                        {% if blog.photo %}
-                                        src="{{ blog.photo.url }}" 
-                                        {% else %}
-                                        src="https://www.ascian.in/creatives/wp-content/uploads/blog-700x410.jpg" 
-                                        {% endif %}
-                                        style="border-radius: 10px;"
-                                        alt="post" class="post-image">			
-                                    </a>
-                                </figure>
+                                        <figure>
+                                            <a href="{% url 'detail_blog' blog.id %}" class="image-hvr-effect">
+                                                <img
+                                                        {% if blog.photo %}
+                                                            src="{{ blog.photo.url }}"
+                                                        {% else %}
+                                                            src="https://www.ascian.in/creatives/wp-content/uploads/blog-700x410.jpg"
+                                                        {% endif %}
+                                                            style="border-radius: 10px;"
+                                                            alt="post" class="post-image">
+                                            </a>
+                                        </figure>
 
-                                <div class="post-item">	
-                                    <div class="meta-date">{{ blog.datetime_created }}</div>			
-                                    <h3><a href="{% url 'detail_blog' blog.id %}">{{ blog.title|title }}</a></h3>
+                                        <div class="post-item">
+                                            <div class="meta-date">{{ blog.datetime_created }}</div>
+                                            <h3><a href="{% url 'detail_blog' blog.id %}">{{ blog.title|title }}</a>
+                                            </h3>
 
-                                    <div class="links-element">
-                                        <div class="categories">inspiration</div>
-                                        <div class="social-links">
-                                            <ul>
-                                                <li>
-                                                    <a href="#"><i class="icon icon-facebook"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="icon icon-twitter"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="icon icon-behance-square"></i></a>
-                                                </li>
-                                            </ul>
+                                            <div class="links-element">
+                                                <div class="categories">inspiration</div>
+                                                <div class="social-links">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#"><i class="icon icon-facebook"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="icon icon-twitter"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="icon icon-behance-square"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div><!--links-element-->
+
                                         </div>
-                                    </div><!--links-element-->
+                                    </article>
 
                                 </div>
-                            </article>
-                            
+                            {% endfor %}
                         </div>
-                        {% endfor %}
-                    </div>
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="btn-wrap align-center">
-                            <a href="{% url 'list_blog' %}" class="btn btn-outline-accent btn-accent-arrow"
-                               tabindex="0">Read All Articles<i class="icon icon-ns-arrow-right"></i></a>
+                            <div class="btn-wrap align-center">
+                                <a href="{% url 'list_blog' %}" class="btn btn-outline-accent btn-accent-arrow"
+                                   tabindex="0">Read All Articles<i class="icon icon-ns-arrow-right"></i></a>
+                            </div>
                         </div>
-                    </div>
 
-                </div>	
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     {% endif %}
 
     <!--Download App-->
