@@ -59,16 +59,17 @@
                         <h3>Comments</h3>
                         <div class="comment-list mt-4">
                             {% for comment in comments %}
-                                <img src="images/default.png" alt="default" class="commentorImg">
-                                <article class="flex-container d-flex mb-3 pt-4">
+                                <img src="{% static 'images/hummen.png' %}" alt="default" class="commentorImg"
+                                     style="height: 74px; width: 74px; border-radius: 50%">
+                                <article class="flex-container d-flex mb-3 pt-2">
                                     <div class="author-post">
                                         <h4>{{ comment.author}}</h4>
                                         <div class="comment-meta d-flex">
-                                            <span class="meta-date">{{ blog.datetime_created|date:"M d,Y"}} <a href="#">Reply</a></span>
+                                            <span class="meta-date">{{ comment.datetime_created|date:"M d,Y"}} <a href="#">Reply</a></span>
 
                                         </div><!--meta-tags-->
 
-                                        <p>{{ blog.discription|linebreaks }}</p>
+                                        <p>{{ comment.text|linebreaks }}</p>
                                     </div>
 
                                 </article><!--flex-container-->

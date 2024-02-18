@@ -28,10 +28,13 @@
                         <p>{{ book.price|intcomma }}</p>
 
                         <p>{{ book.description|linebreaks }}</p>
+
                         {% if user.is_staff %}
                         <a href="{% url 'book_edit' book.id %}" class="btn btn-outline-dark btn-rounded">Edit</a>
                         <a href="{% url 'book_delete' book.id %}" class="btn btn-outline-dark btn-rounded">Delete</a>
+                        <br>
                         {% endif %}
+                        <button type="submit" name="add-to-cart" value="27545" class="button">Add to cart</button>
                     </div>
                 </div>
             </div>

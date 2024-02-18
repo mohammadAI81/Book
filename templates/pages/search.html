@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% if blogs %}
+        <h3>Blog</h3>
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                <th>Blog</th>
+                <th>Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for blog in blogs %}
+                <tr>
+                    <td>{{ blog.title|capfirst }}</td>
+                    <td><a href="{% url 'detail_blog' blog.id %}">More Detail</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% endif %}
+
+        {% if books %}
+        <h3>Books</h3>
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                <th>book</th>
+                <th>Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.title|capfirst }}</td>
+                    <td><a href="{% url 'book_detail' book.id %}">More Detail</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% endif %}
+    </div>
+{% endblock %}
