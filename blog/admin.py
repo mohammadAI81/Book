@@ -4,6 +4,13 @@ from django.contrib.admin import ModelAdmin
 from .models import Comment, Blog
 
 
+class CommentBlog(admin.TabularInline):
+    model = Comment
+    fields = ['author', 'text']
+    extra = 1
+
+
+
 @admin.register(Blog)
 class BlogAdmin(ModelAdmin):
     list_display = ('title', 'author', 'status', 'datetime_created')    
@@ -12,6 +19,10 @@ class BlogAdmin(ModelAdmin):
     list_per_page = 20
     ordering = ('title',)
     readonly_fields = ('datetime_created', 'datetime_modified')
+    
+    inlines = [
+        CommentBlog,
+    ]
 
 
 @admin.register(Comment)
