@@ -2,17 +2,15 @@ import os
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
 
 from .models import Blog, Comment
 
 
-def blogs(request):
-    blog = Blog.objects.filter(status='pd').order_by('-datetime_created')
-
-    context = {
-        'blogs': blog,
-    }
-    return render(request, 'blog/blogs.html', context)
+class BlogListView(ListView):
+    queryset = Blog.objects.order_by('-datetime_created')
+    template_name = 'blog/blogs.html'
+    context_object_name = 'blogs'
 
 
 @login_required(login_url='/account/login/')

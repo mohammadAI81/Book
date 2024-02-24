@@ -1,18 +1,16 @@
 import os
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 
 from .models import Book, Author
 
 
-def books(request):
-    book = Book.objects.order_by('-datetime_created').all()
-
-    context = {
-        'books': book,
-    }
-    return render(request, 'books/books.html', context)
+class BookListView(ListView):
+    queryset = Book.objects.order_by('-datetime_created')
+    template_name = 'books/books.html'
+    context_object_name = 'books'
 
 
 def create(request):
