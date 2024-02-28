@@ -882,12 +882,12 @@ function update() {
   // compute reference element offsets
   data.offsets.reference = getReferenceOffsets(this.state, this.popper, this.reference);
 
-  // compute auto placement, store placement inside the data object,
+  // compute auto placement, shop placement inside the data object,
   // modifiers will be able to edit `placement` if needed
   // and refer to originalPlacement to know the original value
   data.placement = computeAutoPlacement(this.options.placement, data.offsets.reference, this.popper, this.reference, this.options.modifiers.flip.boundariesElement, this.options.modifiers.flip.padding);
 
-  // store the computed placement inside `originalPlacement`
+  // shop the computed placement inside `originalPlacement`
   data.originalPlacement = data.placement;
 
   // compute the popper offsets
@@ -1140,7 +1140,7 @@ function applyStyleOnLoad(reference, popper, options, modifierOptions, state) {
   // compute reference element offsets
   var referenceOffsets = getReferenceOffsets(state, popper, reference);
 
-  // compute auto placement, store placement inside the data object,
+  // compute auto placement, shop placement inside the data object,
   // modifiers will be able to edit `placement` if needed
   // and refer to originalPlacement to know the original value
   var placement = computeAutoPlacement(options.placement, referenceOffsets, popper, reference, options.modifiers.flip.boundariesElement, options.modifiers.flip.padding);

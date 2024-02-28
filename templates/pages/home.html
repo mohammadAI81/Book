@@ -25,7 +25,7 @@
                                                     class="icon icon-ns-arrow-right"></i></a>
                                         </div>
                                     </div><!--banner-content-->
-                                    <img src="{{ book.photo.url }}" alt="banner" class="banner-image">
+                                    <img src="{{ book.photo.url }}" alt="banner" class="banner-image" style="width: 395px; height: 572px">
                                 </div><!--slider-item-->
                             {% endfor %}
 
@@ -67,7 +67,7 @@
                                                     {% else %}
                                                         src="https://shop.bl.uk/cdn/shop/products/BibliophileNotebookWEBI_200x.jpg?v=1666777808"
                                                     {% endif %}
-                                                        style="border-radius: 10px;"
+                                                        style="border-radius: 10px; width: 290px; height: 381px"
                                                         alt="Books" class="product-item">
                                             <button type="button" class="add-to-cart" data-product-tile="add-to-cart">
                                                 Add to Cart
@@ -75,7 +75,7 @@
                                             <figcaption>
                                                 <h3> {{ book.title }} </h3>
                                                 <p> {{ book.author }} </p>
-                                                <div class="item-price"> {{ book.price|intcomma }}  </div>
+                                                <div class="item-price"> {{ book.price|intcomma }} Rial </div>
                                             </figcaption>
                                         </figure>
                                     </div>
@@ -228,7 +228,7 @@
                                     Adipiscing fames semper erat ac in suspendisse iaculis.</p>
                                     <div class="google-app">
                                         <img src="{% static 'images/google-play.jpg' %}" alt="google play">
-                                        <img src="{% static 'images/app-store.jpg' %}" alt="app store">
+                                        <img src="{% static 'images/app-shop.jpg' %}" alt="app store">
                                     </div>
                                 </div>
                             </div>
