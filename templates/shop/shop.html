@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} Shop {% endblock title %}
+
+{% block content %}
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="colored">
+                        <h1 class="page-title">Shop</h1>
+                        <div class="breadcum-items">
+                            <span class="item"><a href="{% url 'home' %}">Home /</a></span>
+                            <span class="item colored">Shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--site-banner-->
+
+    <section class="padding-large">
+        <div class="container">
+            <div class="row">
+
+                <div class="products-grid grid">
+
+                    {% for book in books %}
+                    <figure class="product-style">
+                        <img src="{{ book.photo.url }}" alt="Books" class="product-item" width="219px" height="317px">
+                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
+                        <figcaption>
+                            <a href="{% url 'book_detail' book.id %}" style="text-decoration: none"><h3>{{ book.title|title }}</h3></a>
+                            <p>{{ book.author|title }}</p>
+                            <div class="item-price">{{ book.price|intcomma }} Rial</div>
+                        </figcaption>
+                    </figure>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock content %}

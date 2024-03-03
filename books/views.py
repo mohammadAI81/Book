@@ -7,12 +7,6 @@ from django.contrib.auth.decorators import login_required
 from .models import Book, Author
 
 
-class BookListView(ListView):
-    queryset = Book.objects.order_by('-datetime_created')
-    template_name = 'books/books.html'
-    context_object_name = 'books'
-
-
 def create(request):
     authors = Author.objects.all()
     if request.method == 'POST':

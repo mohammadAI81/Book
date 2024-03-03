@@ -10,6 +10,9 @@ class Cart(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"Cart of {self.customer.username}"
+
 
 class CartItem(models.Model):
     product = models.ForeignKey(Book, on_delete=models.PROTECT, related_name='cart_item')

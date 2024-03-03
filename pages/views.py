@@ -5,7 +5,7 @@ from books.models import Book
 
 
 def home(request):
-    blogs = Blog.objects.filter(status='pd').order_by('-datetime_created').all()[:3]
+    blogs = Blog.objects.filter(status='pd').order_by('-datetime_created')[:3]
     books = Book.objects.all()
     
     context = {

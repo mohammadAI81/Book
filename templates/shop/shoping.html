@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %} Shoping {% endblock title %}
+
+
+{% block content %}
+    <div class="container">
+        {% if cart %}
+        <h3>Blog</h3>
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                <th>Product</th>
+                <th>Unit price</th>
+                <th>Number</th>
+                <th>Result price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cart_item in cart %}
+                <tr>
+                    <td>{{ cart_item.product.title }}</td>
+                    <td>$ {{ cart_item.unit_price|intcomma }}</td>
+                    <td>{{ cart_item.number }}</td>
+                    <td>$ {{ cart_item.result_price|intcomma }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td><h3>Total price</h3></td>
+                    <td></td>
+                    <td></td>
+                    <td><h4>$ {{ total_price|intword}}</h4></td>
+                </tr>
+            </tbody>
+        </table>
+        {% else %}
+            <h3>You Do not have any cart</h3>
+        {% endif %}
+        <div class="col-md-offset-9">
+            <button class="btn btn-rounded btn-large" type="submit">Go to pay</button>
+        </div>
+    </div>
+{% endblock %}
+

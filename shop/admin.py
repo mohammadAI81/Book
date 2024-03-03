@@ -12,13 +12,16 @@ class CartItemOfCart(admin.StackedInline):
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
     list_display = ('product', 'unit_price', 'number', )
-    list_editable = ('number', 'product', )
+    list_editable = ('number', )
     list_per_page = 25
+    fieldsets = (
+        ('Fields Import', {'fields': ('cart', 'product', 'number',)}),
+    )
 
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    list_display = ('customer', )
+    list_display = ('customer', 'datetime_created')
     inlines = [
         CartItemOfCart,
     ]
