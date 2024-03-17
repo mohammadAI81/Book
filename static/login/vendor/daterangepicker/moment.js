@@ -1792,11 +1792,11 @@
             minutes * 6e4 + // 1000 * 60
             hours * 1000 * 60 * 60; //using 1000 * 60 * 60 instead of 36e5 to avoid floating point rounding errors https://github.com/moment/moment/issues/2978
         // Because of dateAddRemove treats 24 hours as different from a
-        // day when working around DST, we need to shop them separately
+        // day when working around DST, we need to cart them separately
         this._days = +days +
             weeks * 7;
         // It is impossible translate months into days without knowing
-        // which months you are are talking about, so we have to shop
+        // which months you are are talking about, so we have to cart
         // it separately.
         this._months = +months +
             quarters * 3 +

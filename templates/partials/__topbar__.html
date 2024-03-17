@@ -17,7 +17,7 @@
 							<a href="{% url 'signup' %}" class="user-account for-buy">Sign Up</a>
 							<a href="{% url 'login' %}" class="user-account for-buy">Login</a>
 						{% endif %}
-						<a href="{% url 'shoping' %}" class="cart for-buy">Cart</a>
+						<a href="{% url 'shopping' %}" class="cart for-buy">Cart</a>
 
 						<div class="action-menu">
 
@@ -76,7 +76,7 @@
 								><a href="{% url 'about' %}" class="nav-link" data-effect="About">About</a></li>
 								<li style="cursor: pointer"><a>Book</a>
 									<ul class="menu-list">
-									    <li><a href="{% url 'shop-list' %}" class="nav-link" data-effect="Books">Shop</a></li>
+									    <li><a href="{% url 'cart-list' %}" class="nav-link" data-effect="Books">Shop</a></li>
 								        <li><a href="{% url 'authors' %}" class="nav-link">Authors</a></li>
                                         {% if user.is_authenticated %}
 								        <li><a href="{% url 'book_create' %}" class="nav-link">New Book</a></li>

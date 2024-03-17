@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'account.apps.AccountConfig',
     'books.apps.BooksConfig',
-    'shop.apps.ShopConfig',
+    'cart.apps.ShopConfig',
 
     'debug_toolbar',
 ]

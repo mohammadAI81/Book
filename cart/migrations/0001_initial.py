@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('number', models.PositiveIntegerField()),
                 ('result_price', models.PositiveIntegerField()),
                 ('datetime_created', models.DateTimeField(auto_now_add=True)),
-                ('cart', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cart_item', to='shop.cart')),
+                ('cart', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cart_item', to='cart.cart')),
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='cart_item', to='books.book')),
             ],
         ),
