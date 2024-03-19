@@ -17,10 +17,12 @@
         <div class="row">
 			<div class="col-md-12">
                 <br>
+                {% if comments %}
 				<h3>Comments</h3>
 				<table class="u-full-width">
                     <thead>
                         <tr>
+                        <th>#</th>
                         <th>Blog</th>
                         <th>Text</th>
                         <th>Time Ago</th>
@@ -29,6 +31,7 @@
 				    <tbody>
                         {% for comment in comments %}
                         <tr>
+                            <td>{{ forloop.counter }}</td>
                             <td>{{ comment.blog }}</td>
                             <td>{{ comment.text|truncatechars:15 }}</td>
                             <td>{{ comment.datetime_created|timesince }}</td>
@@ -36,19 +39,25 @@
                         {% endfor %}
                     </tbody>
 				</table>
+                {% else %}
+                    <h3>Do't Have comment</h3>
+                {% endif %}
                 <br>
+                {% if blogs %}
                 <h3>Blog</h3>
 				<table class="u-full-width">
                     <thead>
                         <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Time Ago</th>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Time Ago</th>
                         </tr>
                     </thead>
 				    <tbody>
                         {% for blog in blogs %}
                         <tr>
+                            <td>{{ forloop.counter }}</td>
                             <td>{{ blog.title }}</td>
                             <td>{{ blog.discription|truncatechars:15 }}</td>
                             <td>{{ blog.datetime_created|timesince }}</td>
@@ -56,6 +65,9 @@
                         {% endfor %}
                     </tbody>
 				</table>
+                {% else %}
+                    <h3>Do't have blog</h3>
+                {% endif %}
 			</div>
 			
 		</div>

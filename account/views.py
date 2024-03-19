@@ -18,7 +18,7 @@ from blog.models import Blog, Comment
 #                 else:
 #                     return redirect('home')
 #             else:
-#                 return redirect('login')    
+#                 return redirect('signup')    
 #         else:
 #             return redirect('login')
 #     return render(request, 'registration/login.html')

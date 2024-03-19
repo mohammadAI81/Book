@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from blog.models import Blog, Comment
 from books.models import Book
@@ -44,3 +45,14 @@ def search(request):
     }
 
     return render(request, 'pages/search.html', context)
+
+
+# # Admin Views
+# @login_required(login_url='/account/login/')
+# def index_admin(request):
+
+#     if not request.user.is_superuser:
+#         return redirect('dashboard')
+
+#     return render(request, 'pages/wb_admin/home.html')
+    
