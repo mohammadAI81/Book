@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'books.apps.BooksConfig',
     'cart.apps.ShopConfig',
+    'admin.apps.AdminConfig',
 
     'debug_toolbar',
 ]

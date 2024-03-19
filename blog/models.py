@@ -1,5 +1,5 @@
 from django.db import models
-from django.conf import settings
+from django.contrib.auth import get_user_model
 
 
 class Blog(models.Model):
@@ -10,7 +10,7 @@ class Blog(models.Model):
         (STATUS_DRA, 'Draft'),
     )
 
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='auhtor_blog',
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='auhtor_blog',
                                null=True)
     photo = models.FileField(upload_to='blog/cover/%Y/%m', blank=True)
     title = models.CharField(max_length=255)
@@ -24,7 +24,7 @@ class Blog(models.Model):
     
     
 class Comment(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='author_comments')
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='author_comments')
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='blog_comments', null=True)
     text = models.TextField()
     datetime_created = models.DateTimeField(auto_now_add=True)
